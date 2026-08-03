@@ -970,7 +970,7 @@ function viewParametres(){
     +'<button class="btn" type="submit">Enregistrer</button></form>'
     +'<h3>Données</h3>'
     +'<p class="discret">Prototype : toutes les données (demandes, finances, paramètres) sont conservées localement dans ce navigateur — rien n\'est envoyé sur un serveur. En production, elles seront stockées dans la base de données sécurisée de la paroisse.</p>'
-    +'<div class="actions-ligne"><button class="btn petit secondaire" id="btn-reset-demo">Réinitialiser les données de démonstration</button><button class="btn petit secondaire" id="btn-tout-effacer">Tout effacer</button></div></div>';
+    +'<div class="actions-ligne"><button class="btn petit" id="btn-retirer-demo">Retirer les données de démonstration</button><button class="btn petit secondaire" id="btn-reset-demo">Réinitialiser les données de démonstration</button><button class="btn petit secondaire" id="btn-tout-effacer">Tout effacer</button></div></div>';
 }
 
 function majEntete(){
@@ -2446,13 +2446,21 @@ function viewParametres(){
     +'<h3>Horaire des messes — temps ordinaire</h3>'+editeurMesses()
     +'<h3>Données</h3>'
     +'<p class="discret">Prototype : toutes les données (demandes, finances, paramètres) sont conservées localement dans ce navigateur — rien n\'est envoyé sur un serveur. En production, elles seront stockées dans la base de données sécurisée de la paroisse.</p>'
-    +'<div class="actions-ligne"><button class="btn petit secondaire" id="btn-reset-demo">Réinitialiser les données de démonstration</button><button class="btn petit secondaire" id="btn-tout-effacer">Tout effacer</button></div></div>';
+    +'<div class="actions-ligne"><button class="btn petit" id="btn-retirer-demo">Retirer les données de démonstration</button><button class="btn petit secondaire" id="btn-reset-demo">Réinitialiser les données de démonstration</button><button class="btn petit secondaire" id="btn-tout-effacer">Tout effacer</button></div></div>';
 }
 
 /* ---------- Handlers bilinguisme + messes ---------- */
 document.addEventListener("click",function(e){
   const t=e.target;
   if(t.id==="btn-lang"){localStorage.setItem("pa_lang",lang()==="fr"?"en":"fr");route();return;}
+  if(t.id==="btn-retirer-demo"){
+    if(!confirm("Retirer les demandes et les bénévoles fictifs de démonstration ? Vos vraies données (paramètres, registres, finances, messes) seront conservées.")) return;
+    const refsDemo=["BAP-2026-A1B2","MAR-2026-C3D4","CON-2026-G7H8","FUN-2026-E5F6","BAP-2026-I9J0"];
+    sauverDemandes(chargerDemandes().filter(d=>refsDemo.indexOf(d.ref)===-1));
+    sauverBenevoles(chargerBenevoles().filter(b=>String(b.id).indexOf("bv-demo")!==0));
+    localStorage.setItem("pa_seed_v2","1");localStorage.setItem("pa_seed_v3","1");
+    route();return;
+  }
   if(t.id==="btn-ajout-messe"){
     const m=chargerMesses();
     m.push({jour:parseInt(document.getElementById("m-jour").value,10),
