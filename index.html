@@ -2442,6 +2442,7 @@ function viewParametres(){
     +'<label for="p-partage">Répartition des coûts partagés de l\'unité (salaires des prêtres, logement…)</label><textarea id="p-partage">'+esc(p.partage)+'</textarea>'
     +'<label for="p-guides">Guides diocésains des célébrations (liens ou références des documents annuels : Avent, Carême, Noël, Triduum)</label><textarea id="p-guides" placeholder="Ex. : Guide de la célébration pénitentielle de l\'Avent 2026 — document du diocèse disponible auprès de la chancellerie…">'+esc(p.guides_diocesains)+'</textarea>'
     +'<label for="p-messes-forts">Horaire des messes pour les temps forts (Avent, Noël, Carême, Triduum) — texte libre fixé par l\'équipe pastorale</label><textarea id="p-messes-forts" placeholder="Ex. : Noël 2026 — 24 déc. 16h Assomption (anglais), 19h Saint-Georges ; 25 déc. 9h Saint-André, 11h Saint-Michel…">'+esc(p.messes_forts||"")+'</textarea>'
+    +'<label for="p-pretres">Prêtres de l\'unité (modérateur et prêtres collaborateurs) — un par ligne : Nom, téléphone, courriel</label><textarea id="p-pretres" placeholder="Ex. : P. Jean Untel, modérateur, 506-000-0000, jean.untel@diocese.ca&#10;P. Marc Autre, prêtre collaborateur, 506-000-0001">'+esc(p.pretres||"")+'</textarea>'
     +'<button class="btn" type="submit">Enregistrer</button></form>'
     +'<h3>Horaire des messes — temps ordinaire</h3>'+editeurMesses()
     +'<h3>Données</h3>'
@@ -2483,7 +2484,8 @@ document.addEventListener("submit",function(e){
     directives:document.getElementById("p-directives").value,
     partage:document.getElementById("p-partage").value,
     guides_diocesains:document.getElementById("p-guides").value,
-    messes_forts:document.getElementById("p-messes-forts").value};
+    messes_forts:document.getElementById("p-messes-forts").value,
+    pretres:document.getElementById("p-pretres").value};
   sauverParams(p);
   const lignes=document.getElementById("p-paroisses").value.split("\n").map(x=>x.trim()).filter(Boolean);
   if(lignes.length) sauverParoisses(lignes);
@@ -2901,6 +2903,55 @@ function viewLiturgieGuide(id){
     +'<h3>'+t("reperes_lit")+'</h3><ul class="liste">'+g.reperes.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>'
     +blocSources(id)
     +'<div class="actions-ligne"><button class="btn secondaire btn-print">'+t("imprimer_guide")+'</button></div></div>';
+}
+
+route();
+</script>
+<script>
+/* ============================================================
+   RÉPERTOIRE — ajout des prêtres de l'unité (modérateur et
+   prêtres collaborateurs), saisis dans Paramètres.
+   ============================================================ */
+Object.assign(TR.fr,{
+  pretres_titre:"Prêtres de l'unité pastorale",
+  rep_intro:"Répertoire des prêtres de l'unité et des bénévoles actifs, par paroisse et par service, avec leurs coordonnées. Imprimable pour le secrétariat et les responsables de services.",
+  rep_vide:"Aucun bénévole actif pour le moment."
+});
+Object.assign(TR.en,{
+  pretres_titre:"Priests of the pastoral unit",
+  rep_intro:"Directory of the unit's priests and active volunteers, by parish and ministry, with contact details. Printable for the parish office and ministry coordinators.",
+  rep_vide:"No active volunteers yet."
+});
+
+function blocPretres(){
+  const p=params();
+  const lignes=(p.pretres||"").split("\n").map(x=>x.trim()).filter(Boolean);
+  if(!lignes.length) return "";
+  const items=lignes.map(l=>{
+    const m=l.split(/\s*[—–,;|]\s*/);
+    const nom=m.shift(); const contact=m.join(" · ");
+    return '<tr><td style="width:42%;vertical-align:top"><strong>'+esc(nom)+'</strong></td><td><span class="discret">'+esc(contact)+'</span></td></tr>';
+  }).join("");
+  return '<h3>'+t("pretres_titre")+'</h3><table><tbody>'+items+'</tbody></table>';
+}
+
+function viewRepertoire(){
+  const paroisses=chargerParoisses();
+  const actifs=chargerBenevoles().filter(b=>b.statut==="actif");
+  let corps=blocPretres();
+  paroisses.forEach(p=>{
+    const vols=actifs.filter(b=>b.paroisse===p);
+    if(!vols.length) return;
+    const lignes=MINISTERES.map(m=>{
+      const gens=vols.filter(b=>(b.ministeres||[]).includes(m[0]));
+      if(!gens.length) return "";
+      return '<tr><td style="vertical-align:top;width:42%"><strong>'+m[1]+'</strong></td><td>'+gens.map(b=>'<strong>'+esc(b.nom)+'</strong>'+(b.adulte==="jeune"?' <span class="discret">(jeune)</span>':"")+'<br><span class="discret">'+esc(b.tel||"")+(b.courriel?" · "+esc(b.courriel):"")+(b.dispo?" · "+esc(b.dispo):"")+'</span>').join("<br><br>")+'</td></tr>';
+    }).join("");
+    corps+='<h3>'+esc(p)+'</h3><table><tbody>'+lignes+'</tbody></table>';
+  });
+  if(!corps) corps='<p class="discret">'+t("rep_vide")+'</p>';
+  return '<p class="discret">'+t("rep_intro")+'</p>'
+    +'<div class="actions-ligne" style="margin:0 0 12px"><button class="btn petit secondaire" id="btn-csv-benevoles">Exporter CSV</button><button class="btn petit secondaire btn-print">'+(lang()==="en"?"Print":"Imprimer")+'</button></div>'+corps;
 }
 
 route();
