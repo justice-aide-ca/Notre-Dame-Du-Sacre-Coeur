@@ -2250,7 +2250,6 @@ function viewAccueil(){
     +'<div class="encart rouge">'+t("urgence")+(p.telephone?(lang()==="en"?" at <strong>"+esc(p.telephone)+"</strong>":" au <strong>"+esc(p.telephone)+"</strong>"):"")+'.</div>'
     +'<div class="actions-ligne"><a class="btn" href="#/demande">'+t("btn_demande")+'</a><a class="btn secondaire" href="#/suivi">'+t("btn_suivi")+'</a></div>'
     +'</div>'
-    +carteMesses()
     +'<div class="carte"><h2>'+t("sacrements_titre")+'</h2><div class="grille">'+tuiles+'</div></div>';
 }
 
@@ -2878,7 +2877,8 @@ function viewLiturgie(){
   const sources=lang()==="en"
     ?"Usual sources of the unit: for the francophone community, the journal « Vie liturgique » (Novalis) and « Vivre et célébrer » (National Office of Liturgy, CCCB); for the anglophone community, publications of the CCCB English sector (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Each guide recalls them."
     :"Sources habituelles de l'unité : pour la communauté francophone, la revue « Vie liturgique » (Novalis) et « Vivre et célébrer » (Office national de liturgie de la CECC) ; pour la communauté anglophone, les publications du secteur anglais de la CECC (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Chaque guide les rappelle.";
-  return '<div class="carte"><h2>'+t("lit_titre")+'</h2>'
+  return carteMesses()
+    +'<div class="carte"><h2>'+t("lit_titre")+'</h2>'
     +'<p>'+intro+'</p><p class="discret">'+sources+'</p>'
     +guides
     +'<div class="grille">'+tuiles+'</div>'
