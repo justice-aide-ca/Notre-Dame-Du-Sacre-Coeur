@@ -3020,18 +3020,18 @@ Object.assign(TR.en,{
 });
 
 const EGLISES=[
- {nom:"Assomption",img:"images/assomption-exterieur.jpg",
-  fr:"L'église de pierre de l'Assomption (1906-1907) et son presbytère sont au cœur de la vie de l'unité. La messe du vendredi, à 9h, y est célébrée en anglais.",
-  en:"The stone church of the Assumption (1906-1907) and its rectory are at the heart of the unit's life. Friday Mass, at 9 a.m., is celebrated there in English."},
- {nom:"Saint-Georges",img:"images/saint-georges.jpg",
-  fr:"La messe du mardi à 19h y est précédée du chapelet et de l'adoration dès 18h.",
-  en:"Tuesday Mass at 7 p.m. is preceded there by the rosary and adoration from 6 p.m."},
- {nom:"Saint-André",img:"images/saint-andre.jpg",
-  fr:"La messe du jeudi y est célébrée à 9h du matin.",
-  en:"Thursday Mass is celebrated there at 9 a.m."},
- {nom:"Saint-Michel",img:"images/saint-michel.jpg",maps:"https://maps.app.goo.gl/kdBrQagZrsqnxPfT7",
-  fr:"La messe du mercredi y est célébrée à 19h.",
-  en:"Wednesday Mass is celebrated there at 7 p.m."}
+ {nom:"Assomption",img:"images/assomption-exterieur.jpg",lien:"https://diocese-edmundston.ca/fr/zp_grand-sault_assomption.html",
+  fr:"Paroisse mère de la région, érigée en 1868 : après l'incendie de 1906, son église de pierre est rebâtie et ouverte en 1909. Paroisse bilingue, la messe du vendredi, à 9h, y est célébrée en anglais.",
+  en:"The mother parish of the region, erected in 1868: after the 1906 fire, its stone church was rebuilt and opened in 1909. A bilingual parish, Friday Mass at 9 a.m. is celebrated there in English."},
+ {nom:"Saint-Georges",img:"images/saint-georges.jpg",lien:"https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html",
+  fr:"Érigée en 1950, la paroisse bénit son église de brique en 1953 ; une statue de saint Georges en marbre d'Italie veille sur le parvis. La messe du mardi à 19h y est précédée du chapelet et de l'adoration dès 18h.",
+  en:"Erected in 1950, the parish blessed its brick church in 1953; a marble statue of Saint George carved in Italy watches over the entrance. Tuesday Mass at 7 p.m. is preceded there by the rosary and adoration from 6 p.m."},
+ {nom:"Saint-André",img:"images/saint-andre.jpg",lien:"https://diocese-edmundston.ca/fr/zp_st-andre.html",
+  fr:"L'église de Saint-André (1904), au cœur des vallons, est célèbre pour sa rosace et son intérieur tout en blanc. La messe du jeudi y est célébrée à 9h.",
+  en:"The church of Saint-André (1904), nestled among the valleys, is famed for its rose window and its all-white interior. Thursday Mass is celebrated there at 9 a.m."},
+ {nom:"Saint-Michel",img:"images/saint-michel.jpg",maps:"https://maps.app.goo.gl/kdBrQagZrsqnxPfT7",lien:"https://diocese-edmundston.ca/fr/zp_drummond.html",
+  fr:"Érigée en 1890, la paroisse de Drummond bâtit son église actuelle en 1906-1908, au cœur de l'une des plus belles régions agricoles du Nouveau-Brunswick. La messe du mercredi y est célébrée à 19h.",
+  en:"Erected in 1890, the parish of Drummond built its present church in 1906-1908, in the heart of one of New Brunswick's finest farming regions. Wednesday Mass is celebrated there at 7 p.m."}
 ];
 
 function cartesEglises(){
@@ -3040,7 +3040,8 @@ function cartesEglises(){
       ?'<img src="'+e.img+'" alt="'+esc(e.nom)+'" loading="lazy">'
       :'<div class="eglise-ph">⛪<span>'+t("photo_avenir")+'</span></div>';
     const lien=e.maps?' <a href="'+e.maps+'" target="_blank" rel="noopener" style="font-size:.82rem">🗺️ '+(lang()==="en"?"Directions":"Itinéraire")+'</a>':"";
-    return '<div class="eglise-carte">'+visuel+'<div class="eglise-corps"><strong>'+esc(e.nom)+'</strong><p>'+esc(lang()==="en"?e.en:e.fr)+lien+'</p></div></div>';
+    const lienDio=e.lien?' <a href="'+e.lien+'" target="_blank" rel="noopener" style="font-size:.82rem">🔗 '+(lang()==="en"?"Diocesan page":"Page diocésaine")+'</a>':"";
+    return '<div class="eglise-carte">'+visuel+'<div class="eglise-corps"><strong>'+esc(e.nom)+'</strong><p>'+esc(lang()==="en"?e.en:e.fr)+lien+lienDio+'</p></div></div>';
   }).join("");
 }
 
@@ -3073,7 +3074,8 @@ Object.assign(TR.fr,{
   feuillet_resume:"Le feuillet du dimanche : intentions de messe, annonces et vie de l'unité, préparé par l'équipe pastorale.",
   feuillet_maj:"Feuillet du",
   feuillet_vide:"Le feuillet de cette semaine n'est pas encore publié. L'équipe pastorale peut coller le texte du dimanche dans Paramètres.",
-  voir_feuillet:"Consulter le feuillet"
+  voir_feuillet:"Consulter le feuillet",
+  feuillet_diocese:"Le feuillet est aussi publié chaque semaine sur le site du diocèse (PDF)."
 });
 Object.assign(TR.en,{
   annonces_titre:"News and announcements",
@@ -3082,7 +3084,8 @@ Object.assign(TR.en,{
   feuillet_resume:"The Sunday bulletin: Mass intentions, announcements and life of the unit, prepared by the pastoral team.",
   feuillet_maj:"Bulletin of",
   feuillet_vide:"This week's bulletin has not been published yet. The pastoral team can paste the Sunday text in Settings.",
-  voir_feuillet:"Read the bulletin"
+  voir_feuillet:"Read the bulletin",
+  feuillet_diocese:"The bulletin is also published weekly on the diocesan website (PDF)."
 });
 
 function blocAnnonces(){
@@ -3103,7 +3106,8 @@ function viewFeuillet(){
     ?txt.split(/\n\s*\n/).map(par=>'<p>'+esc(par.trim()).replace(/\n/g,"<br>")+'</p>').join("")
     :'<div class="encart">'+t("feuillet_vide")+'</div>';
   return '<a class="retour" href="#/liturgie">'+t("retour_lit")+'</a>'
-    +'<div class="carte"><h2>📰 '+t("feuillet_titre")+'</h2>'+date+corps+'</div>';
+    +'<div class="carte"><h2>📰 '+t("feuillet_titre")+'</h2>'+date+corps
+    +'<p class="discret" style="margin-top:12px"><a href="https://diocese-edmundston.ca/fr/docs/feuillet_paroissial-notre-dame-du-sacre-coeur.pdf" target="_blank" rel="noopener">📄 '+t("feuillet_diocese")+'</a></p></div>';
 }
 
 /* Accueil : on insère le bloc Annonces entre l'urgence et Nos églises */
@@ -3300,9 +3304,15 @@ function blocAVenir(){
 const GALERIE_BASE=[
   {img:"images/assomption-exterieur.jpg",fr:"Église de l'Assomption — extérieur",en:"Church of the Assumption — exterior"},
   {img:"images/assomption-interieur.jpg",fr:"Église de l'Assomption — intérieur",en:"Church of the Assumption — interior"},
+  {img:"images/assomption-aerienne.jpg",fr:"Église de l'Assomption — vue aérienne (photo : diocèse d'Edmundston)",en:"Church of the Assumption — aerial view (photo: Diocese of Edmundston)"},
+  {img:"images/assomption-panorama.jpg",fr:"Église de l'Assomption — le sanctuaire, en français et en anglais (photo : diocèse d'Edmundston)",en:"Church of the Assumption — the sanctuary, in French and English (photo: Diocese of Edmundston)"},
   {img:"images/saint-georges.jpg",fr:"Église Saint-Georges",en:"Saint-Georges church"},
+  {img:"images/saint-georges-cote.jpg",fr:"Église Saint-Georges — vue latérale (photo : diocèse d'Edmundston)",en:"Saint-Georges church — side view (photo: Diocese of Edmundston)"},
   {img:"images/saint-andre.jpg",fr:"Église Saint-André",en:"Saint-André church"},
-  {img:"images/saint-michel.jpg",fr:"Église Saint-Michel",en:"Saint-Michel church"}
+  {img:"images/saint-andre-interieur.jpg",fr:"Église Saint-André — la nef (photo : diocèse d'Edmundston)",en:"Saint-André church — the nave (photo: Diocese of Edmundston)"},
+  {img:"images/saint-andre-rosace.jpg",fr:"Église Saint-André — la rosace (photo : diocèse d'Edmundston)",en:"Saint-André church — the rose window (photo: Diocese of Edmundston)"},
+  {img:"images/saint-michel.jpg",fr:"Église Saint-Michel",en:"Saint-Michel church"},
+  {img:"images/saint-michel-aerienne.jpg",fr:"Église Saint-Michel — vue aérienne (photo : diocèse d'Edmundston)",en:"Saint-Michel church — aerial view (photo: Diocese of Edmundston)"}
 ];
 function photosGalerie(){
   const extra=(params().galerie||"").split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{
