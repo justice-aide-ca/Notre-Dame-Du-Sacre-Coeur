@@ -97,6 +97,8 @@
       <a href="#/demande" data-nav="demande">Faire une demande</a>
       <a href="#/suivi" data-nav="suivi">Suivre ma demande</a>
       <a href="#/liturgie" data-nav="liturgie">Vie liturgique</a>
+      <a href="#/evenements" data-nav="evenements">Événements</a>
+      <a href="#/galerie" data-nav="galerie">Galerie</a>
       <a href="#/benevoles" data-nav="benevoles">Bénévoles</a>
       <a href="#/paroisse" data-nav="paroisse">Espace paroisse</a>
       <a href="#/rapports" data-nav="rapports">Rapports</a>
@@ -2442,8 +2444,14 @@ function viewParametres(){
     +'<label for="p-guides">Guides diocésains des célébrations (liens ou références des documents annuels : Avent, Carême, Noël, Triduum)</label><textarea id="p-guides" placeholder="Ex. : Guide de la célébration pénitentielle de l\'Avent 2026 — document du diocèse disponible auprès de la chancellerie…">'+esc(p.guides_diocesains)+'</textarea>'
     +'<label for="p-messes-forts">Horaire des messes pour les temps forts (Avent, Noël, Carême, Triduum) — texte libre fixé par l\'équipe pastorale</label><textarea id="p-messes-forts" placeholder="Ex. : Noël 2026 — 24 déc. 16h Assomption (anglais), 19h Saint-Georges ; 25 déc. 9h Saint-André, 11h Saint-Michel…">'+esc(p.messes_forts||"")+'</textarea>'
     +'<label for="p-pretres">Prêtres de l\'unité (modérateur et prêtres collaborateurs) — un par ligne : Nom, téléphone, courriel</label><textarea id="p-pretres" placeholder="Ex. : P. Jean Untel, modérateur, 506-000-0000, jean.untel@diocese.ca&#10;P. Marc Autre, prêtre collaborateur, 506-000-0001">'+esc(p.pretres||"")+'</textarea>'
+    +'<h3>Annonces et feuillet (page d\'accueil et vie liturgique)</h3>'
+    +'<label for="p-annonces">Nouvelles et annonces — une par ligne (affichées sur la page d\'accueil)</label><textarea id="p-annonces" placeholder="Ex. : Rentrée de la catéchèse — inscription le 14 septembre après les messes&#10;Souper-bénéfice de Saint-Georges, le 21 septembre à 17h">'+esc(p.annonces||"")+'</textarea>'
+    +'<label for="p-feuillet-date">Date du feuillet (dimanche concerné)</label><input id="p-feuillet-date" type="date" value="'+esc(p.feuillet_date||"")+'">'
+    +'<label for="p-feuillet">Feuillet paroissial — texte du dimanche, collé par l\'équipe pastorale (laisser une ligne vide entre les paragraphes)</label><textarea id="p-feuillet" rows="8" placeholder="Ex. : Intentions de messe de la semaine…&#10;&#10;Annonces de la semaine…">'+esc(p.feuillet||"")+'</textarea>'
+    +'<label for="p-galerie">Galerie photos — ajouts (une ligne par photo : adresse de l\'image | légende française | légende anglaise)</label><textarea id="p-galerie" placeholder="Ex. : images/pelerinage-2026.jpg | Pèlerinage diocésain 2026 | Diocesan pilgrimage 2026">'+esc(p.galerie||"")+'</textarea>'
     +'<button class="btn" type="submit">Enregistrer</button></form>'
     +'<h3>Horaire des messes — temps ordinaire</h3>'+editeurMesses()
+    +'<h3>Calendrier des événements</h3>'+editeurEvenements()
     +'<h3>Données</h3>'
     +'<p class="discret">Prototype : toutes les données (demandes, finances, paramètres) sont conservées localement dans ce navigateur — rien n\'est envoyé sur un serveur. En production, elles seront stockées dans la base de données sécurisée de la paroisse.</p>'
     +'<div class="actions-ligne"><button class="btn petit" id="btn-retirer-demo">Retirer les données de démonstration</button><button class="btn petit secondaire" id="btn-reset-demo">Réinitialiser les données de démonstration</button><button class="btn petit secondaire" id="btn-tout-effacer">Tout effacer</button></div></div>';
@@ -2458,7 +2466,9 @@ document.addEventListener("click",function(e){
     const refsDemo=["BAP-2026-A1B2","MAR-2026-C3D4","CON-2026-G7H8","FUN-2026-E5F6","BAP-2026-I9J0"];
     sauverDemandes(chargerDemandes().filter(d=>refsDemo.indexOf(d.ref)===-1));
     sauverBenevoles(chargerBenevoles().filter(b=>String(b.id).indexOf("bv-demo")!==0));
-    localStorage.setItem("pa_seed_v2","1");localStorage.setItem("pa_seed_v3","1");
+    sauverIntentions(chargerIntentions().filter(x=>x.ref!=="INT-2026-D3M0"));
+    sauverEvenements(chargerEvenements().filter(x=>String(x.id).indexOf("ev-demo")!==0));
+    localStorage.setItem("pa_seed_v2","1");localStorage.setItem("pa_seed_v3","1");localStorage.setItem("pa_seed_v5","1");
     route();return;
   }
   if(t.id==="btn-ajout-messe"){
@@ -2484,7 +2494,11 @@ document.addEventListener("submit",function(e){
     partage:document.getElementById("p-partage").value,
     guides_diocesains:document.getElementById("p-guides").value,
     messes_forts:document.getElementById("p-messes-forts").value,
-    pretres:document.getElementById("p-pretres").value};
+    pretres:document.getElementById("p-pretres").value,
+    annonces:document.getElementById("p-annonces").value,
+    feuillet:document.getElementById("p-feuillet").value,
+    feuillet_date:document.getElementById("p-feuillet-date").value,
+    galerie:document.getElementById("p-galerie").value};
   sauverParams(p);
   const lignes=document.getElementById("p-paroisses").value.split("\n").map(x=>x.trim()).filter(Boolean);
   if(lignes.length) sauverParoisses(lignes);
@@ -2518,8 +2532,6 @@ if(!localStorage.getItem("pa_seed_v4")){
 
 route();
 </script>
-</body>
-</html>
 <script>
 /* ============================================================
    ANNÉE LITURGIQUE — calendrier, suggestions de prière,
@@ -2877,7 +2889,8 @@ function viewLiturgie(){
   const sources=lang()==="en"
     ?"Usual sources of the unit: for the francophone community, the journal « Vie liturgique » (Novalis) and « Vivre et célébrer » (National Office of Liturgy, CCCB); for the anglophone community, publications of the CCCB English sector (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Each guide recalls them."
     :"Sources habituelles de l'unité : pour la communauté francophone, la revue « Vie liturgique » (Novalis) et « Vivre et célébrer » (Office national de liturgie de la CECC) ; pour la communauté anglophone, les publications du secteur anglais de la CECC (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Chaque guide les rappelle.";
-  return carteMesses()
+  return '<div class="bande-photo" style="background-image:url(\'images/assomption-interieur.jpg\')"></div>'
+    +carteMesses()
     +'<div class="carte"><h2>'+t("lit_titre")+'</h2>'
     +'<p>'+intro+'</p><p class="discret">'+sources+'</p>'
     +guides
@@ -2956,3 +2969,657 @@ function viewRepertoire(){
 
 route();
 </script>
+<style>
+.hero{position:relative;border-radius:14px;overflow:hidden;margin:0 0 18px;min-height:340px;display:flex;align-items:flex-end}
+.hero-fond{position:absolute;inset:0;background-size:cover;background-position:center 30%}
+.hero-contenu{position:relative;width:100%;padding:90px 38px 34px;background:linear-gradient(to bottom,rgba(30,18,55,.18),rgba(30,18,55,.78));color:#fff}
+.hero-contenu h2{margin:0 0 8px;font-size:1.9rem;color:#fff}
+.hero-contenu p{margin:0 0 18px;max-width:640px;font-size:1.05rem;line-height:1.5}
+.hero-btn{background:#fff;color:#3b2a63}
+.hero-btn:hover{background:#efe9f8}
+.hero-btn2{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.6)}
+.hero-btn2:hover{background:rgba(255,255,255,.3)}
+.bande-photo{height:170px;border-radius:14px;background-size:cover;background-position:center 40%;margin:0 0 18px}
+.eglises-grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.eglise-carte{border:1px solid #e4def0;border-radius:12px;overflow:hidden;background:#fff}
+.eglise-carte img{width:100%;height:150px;object-fit:cover;display:block}
+.eglise-ph{height:150px;background:linear-gradient(135deg,#ece6f5,#dcd3ec);display:flex;align-items:center;justify-content:center;font-size:2.6rem;color:#8a7ba8;flex-direction:column;gap:6px}
+.eglise-ph span{font-size:.8rem;color:#8a7ba8}
+.eglise-corps{padding:10px 14px 12px}
+.eglise-corps strong{display:block;margin-bottom:3px}
+.eglise-corps p{margin:0;font-size:.86rem;color:#6b6577;line-height:1.45}
+.ev-ligne{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #eee7f5}
+.ev-ligne:last-child{border-bottom:0}
+.ev-date{flex:0 0 62px;text-align:center;background:#f1ebf9;border:1px solid #e0d5f0;border-radius:10px;padding:6px 2px}
+.ev-date .j{display:block;font-size:1.25rem;font-weight:700;color:#3b2a63;line-height:1.1}
+.ev-date .m{display:block;font-size:.72rem;color:#7a6f96;text-transform:uppercase}
+.ev-corps{flex:1}
+.ev-corps strong{display:block}
+.ev-corps .discret{font-size:.84rem}
+.galerie-grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.galerie-item{margin:0}
+.galerie-item img{width:100%;height:150px;object-fit:cover;border-radius:10px;display:block;border:1px solid #e4def0}
+.galerie-item figcaption{font-size:.8rem;color:#6b6577;padding:5px 2px 0;line-height:1.35}
+</style>
+<script>
+/* ============================================================
+   PHASE 1 — LE VISAGE : bannière photo et section Nos églises.
+   Photos de la Paroisse de l'Assomption (1906-1907).
+   ============================================================ */
+Object.assign(TR.fr,{
+  hero_titre:"Bienvenue !",
+  hero_texte:"Quatre paroisses, une même famille de foi : Assomption, Saint-Georges, Saint-André et Saint-Michel — au service des fidèles, de la demande jusqu'à la célébration.",
+  eglises_titre:"Nos quatre églises",
+  photo_avenir:"Photo à venir"
+});
+Object.assign(TR.en,{
+  hero_titre:"Welcome!",
+  hero_texte:"Four parishes, one family of faith: Assumption, Saint-Georges, Saint-André and Saint-Michel — serving the faithful, from the request to the celebration.",
+  eglises_titre:"Our four churches",
+  photo_avenir:"Photo to come"
+});
+
+const EGLISES=[
+ {nom:"Assomption",img:"images/assomption-exterieur.jpg",
+  fr:"L'église de pierre de l'Assomption (1906-1907) et son presbytère sont au cœur de la vie de l'unité. La messe du vendredi, à 9h, y est célébrée en anglais.",
+  en:"The stone church of the Assumption (1906-1907) and its rectory are at the heart of the unit's life. Friday Mass, at 9 a.m., is celebrated there in English."},
+ {nom:"Saint-Georges",img:"images/saint-georges.jpg",
+  fr:"La messe du mardi à 19h y est précédée du chapelet et de l'adoration dès 18h.",
+  en:"Tuesday Mass at 7 p.m. is preceded there by the rosary and adoration from 6 p.m."},
+ {nom:"Saint-André",img:"images/saint-andre.jpg",
+  fr:"La messe du jeudi y est célébrée à 9h du matin.",
+  en:"Thursday Mass is celebrated there at 9 a.m."},
+ {nom:"Saint-Michel",img:"images/saint-michel.jpg",maps:"https://maps.app.goo.gl/kdBrQagZrsqnxPfT7",
+  fr:"La messe du mercredi y est célébrée à 19h.",
+  en:"Wednesday Mass is celebrated there at 7 p.m."}
+];
+
+function cartesEglises(){
+  return EGLISES.map(e=>{
+    const visuel=e.img
+      ?'<img src="'+e.img+'" alt="'+esc(e.nom)+'" loading="lazy">'
+      :'<div class="eglise-ph">⛪<span>'+t("photo_avenir")+'</span></div>';
+    const lien=e.maps?' <a href="'+e.maps+'" target="_blank" rel="noopener" style="font-size:.82rem">🗺️ '+(lang()==="en"?"Directions":"Itinéraire")+'</a>':"";
+    return '<div class="eglise-carte">'+visuel+'<div class="eglise-corps"><strong>'+esc(e.nom)+'</strong><p>'+esc(lang()==="en"?e.en:e.fr)+lien+'</p></div></div>';
+  }).join("");
+}
+
+function viewAccueil(){
+  const p=params();
+  const tuiles=SACREMENTS.map(s=>{
+    const c=sacContent(s);
+    return '<a class="tuile" href="#/demande/'+s.id+'"><div class="icone">'+s.icone+'</div><strong>'+sacNom(s)+'</strong><span>'+esc(c.resume)+'</span></a>';
+  }).join("");
+  return '<div class="hero"><div class="hero-fond" style="background-image:url(\'images/assomption-exterieur.jpg\')"></div>'
+    +'<div class="hero-contenu"><h2>'+t("hero_titre")+'</h2><p>'+t("hero_texte")+'</p>'
+    +'<div class="actions-ligne" style="margin:0"><a class="btn hero-btn" href="#/demande">'+t("btn_demande")+'</a><a class="btn hero-btn2" href="#/suivi">'+t("btn_suivi")+'</a></div></div></div>'
+    +'<div class="carte"><div class="encart rouge" style="margin:0">'+t("urgence")+(p.telephone?(lang()==="en"?" at <strong>"+esc(p.telephone)+"</strong>":" au <strong>"+esc(p.telephone)+"</strong>"):"")+'</div></div>'
+    +'<div class="carte"><h2>'+t("eglises_titre")+'</h2><div class="eglises-grille">'+cartesEglises()+'</div></div>'
+    +'<div class="carte"><h2>'+t("sacrements_titre")+'</h2><div class="grille">'+tuiles+'</div></div>';
+}
+
+route();
+</script>
+<script>
+/* ============================================================
+   PHASE 1 (suite) — NOUVELLES ET ANNONCES sur la page d'accueil
+   + FEUILLET PAROISSIAL consultable (#/feuillet).
+   Textes libres gérés par l'équipe pastorale dans Paramètres.
+   ============================================================ */
+Object.assign(TR.fr,{
+  annonces_titre:"Nouvelles et annonces",
+  annonces_vide:"Aucune annonce pour le moment — les prochaines nouvelles de l'unité pastorale paraîtront ici.",
+  feuillet_titre:"Feuillet paroissial",
+  feuillet_resume:"Le feuillet du dimanche : intentions de messe, annonces et vie de l'unité, préparé par l'équipe pastorale.",
+  feuillet_maj:"Feuillet du",
+  feuillet_vide:"Le feuillet de cette semaine n'est pas encore publié. L'équipe pastorale peut coller le texte du dimanche dans Paramètres.",
+  voir_feuillet:"Consulter le feuillet"
+});
+Object.assign(TR.en,{
+  annonces_titre:"News and announcements",
+  annonces_vide:"No announcements at this time — upcoming news of the pastoral unit will appear here.",
+  feuillet_titre:"Parish bulletin",
+  feuillet_resume:"The Sunday bulletin: Mass intentions, announcements and life of the unit, prepared by the pastoral team.",
+  feuillet_maj:"Bulletin of",
+  feuillet_vide:"This week's bulletin has not been published yet. The pastoral team can paste the Sunday text in Settings.",
+  voir_feuillet:"Read the bulletin"
+});
+
+function blocAnnonces(){
+  const p=params();
+  const lignes=(p.annonces||"").split("\n").map(x=>x.trim()).filter(Boolean);
+  const corps=lignes.length
+    ?'<ul class="liste">'+lignes.map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>'
+    :'<p class="discret">'+t("annonces_vide")+'</p>';
+  const lien=(p.feuillet||"").trim()?'<p style="margin:6px 0 0"><a href="#/feuillet">📰 '+t("voir_feuillet")+' &rarr;</a></p>':"";
+  return '<div class="carte"><h2>📣 '+t("annonces_titre")+'</h2>'+corps+lien+'</div>';
+}
+
+function viewFeuillet(){
+  const p=params();
+  const txt=(p.feuillet||"").trim();
+  const date=p.feuillet_date?'<p class="discret">'+t("feuillet_maj")+' '+formatDate(p.feuillet_date)+'</p>':"";
+  const corps=txt
+    ?txt.split(/\n\s*\n/).map(par=>'<p>'+esc(par.trim()).replace(/\n/g,"<br>")+'</p>').join("")
+    :'<div class="encart">'+t("feuillet_vide")+'</div>';
+  return '<a class="retour" href="#/liturgie">'+t("retour_lit")+'</a>'
+    +'<div class="carte"><h2>📰 '+t("feuillet_titre")+'</h2>'+date+corps+'</div>';
+}
+
+/* Accueil : on insère le bloc Annonces entre l'urgence et Nos églises */
+function viewAccueil(){
+  const p=params();
+  const tuiles=SACREMENTS.map(s=>{
+    const c=sacContent(s);
+    return '<a class="tuile" href="#/demande/'+s.id+'"><div class="icone">'+s.icone+'</div><strong>'+sacNom(s)+'</strong><span>'+esc(c.resume)+'</span></a>';
+  }).join("");
+  return '<div class="hero"><div class="hero-fond" style="background-image:url(\'images/assomption-exterieur.jpg\')"></div>'
+    +'<div class="hero-contenu"><h2>'+t("hero_titre")+'</h2><p>'+t("hero_texte")+'</p>'
+    +'<div class="actions-ligne" style="margin:0"><a class="btn hero-btn" href="#/demande">'+t("btn_demande")+'</a><a class="btn hero-btn2" href="#/suivi">'+t("btn_suivi")+'</a></div></div></div>'
+    +'<div class="carte"><div class="encart rouge" style="margin:0">'+t("urgence")+(p.telephone?(lang()==="en"?" at <strong>"+esc(p.telephone)+"</strong>":" au <strong>"+esc(p.telephone)+"</strong>"):"")+'</div></div>'
+    +blocAnnonces()
+    +'<div class="carte"><h2>'+t("eglises_titre")+'</h2><div class="eglises-grille">'+cartesEglises()+'</div></div>'
+    +'<div class="carte"><h2>'+t("sacrements_titre")+'</h2><div class="grille">'+tuiles+'</div></div>';
+}
+
+/* Vie liturgique : on ajoute la carte Feuillet après l'horaire des messes */
+function viewLiturgie(){
+  const p=params();
+  const tuiles=GUIDES_LITURGIQUES.map(g0=>{
+    const g=guiContent(g0);
+    const prochaines=datesGuide(g.id);
+    const libelle=prochaines.length?t("prochain")+" "+prochaines[0].label+" — "+plage(prochaines[0].debut,prochaines[0].fin):"";
+    return '<a class="tuile" href="#/liturgie/'+g.id+'"><div class="icone">'+g.icone+'</div><strong>'+esc(g.nom)+'</strong><span>'+esc(g.resume)+'</span><br><span class="discret">'+libelle+'</span></a>';
+  }).join("");
+  const tuilesAnnee='<a class="tuile" href="#/liturgie/calendrier"><div class="icone">🗓️</div><strong>'+t("cal_titre")+'</strong><span>'+t("cal_resume")+'</span></a>'
+    +'<a class="tuile" href="#/liturgie/prieres"><div class="icone">🙏</div><strong>'+t("pri_titre")+'</strong><span>'+t("pri_resume")+'</span></a>'
+    +'<a class="tuile" href="#/liturgie/visuel"><div class="icone">🎨</div><strong>'+t("vis_titre")+'</strong><span>'+t("vis_resume")+'</span></a>';
+  const carteFeuillet='<div class="carte"><h2>📰 '+t("feuillet_titre")+'</h2>'
+    +'<p>'+t("feuillet_resume")+'</p>'
+    +'<div class="actions-ligne" style="margin:0"><a class="btn petit" href="#/feuillet">'+t("voir_feuillet")+'</a></div></div>';
+  const guides=p.guides_diocesains?'<div class="encart"><strong>'+(lang()==="en"?"Diocesan documents for the current year":"Documents du diocèse pour l'année en cours")+'</strong><br>'+esc(p.guides_diocesains).replace(/\n/g,"<br>")+'</div>':"";
+  const intro=lang()==="en"
+    ?"Each year, the diocese publishes documents for the great celebrations of the liturgical year: Advent and Lent penitential celebrations, the Christmas Eve vigil, the Easter Triduum. This section gathers practical guides — order of celebration, parish preparation and liturgical references — with automatically computed dates."
+    :"Chaque année, le diocèse propose des documents pour les grandes célébrations de l'année liturgique : célébrations pénitentielles de l'Avent et du Carême, veillée de Noël, Triduum pascal. Cette section rassemble des guides pratiques — déroulé de la célébration, préparation paroissiale et repères liturgiques — avec les dates calculées automatiquement.";
+  const sources=lang()==="en"
+    ?"Usual sources of the unit: for the francophone community, the journal « Vie liturgique » (Novalis) and « Vivre et célébrer » (National Office of Liturgy, CCCB); for the anglophone community, publications of the CCCB English sector (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Each guide recalls them."
+    :"Sources habituelles de l'unité : pour la communauté francophone, la revue « Vie liturgique » (Novalis) et « Vivre et célébrer » (Office national de liturgie de la CECC) ; pour la communauté anglophone, les publications du secteur anglais de la CECC (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Chaque guide les rappelle.";
+  return '<div class="bande-photo" style="background-image:url(\'images/assomption-interieur.jpg\')"></div>'
+    +carteMesses()
+    +carteFeuillet
+    +'<div class="carte"><h2>'+t("lit_titre")+'</h2>'
+    +'<p>'+intro+'</p><p class="discret">'+sources+'</p>'
+    +guides
+    +'<div class="grille">'+tuiles+'</div>'
+    +'<h3>'+t("annee_lit")+'</h3><div class="grille">'+tuilesAnnee+'</div></div>';
+}
+
+/* Routeur : ajout de la route #/feuillet */
+function route(){
+  const h=location.hash||"#/"; const app=document.getElementById("app");
+  let nav="accueil", html="";
+  if(h==="#/"||h==="#") html=viewAccueil();
+  else if(h==="#/demande"){html=viewDemandeListe();nav="demande";}
+  else if(h.indexOf("#/demande/")===0){html=viewDemandeForm(h.slice(10));nav="demande";}
+  else if(h.indexOf("#/confirmation/")===0){html=viewConfirmation(decodeURIComponent(h.slice(15)));nav="suivi";}
+  else if(h==="#/suivi"){html=viewSuivi();nav="suivi";}
+  else if(h==="#/paroisse"){html=viewParoisse();nav="paroisse";}
+  else if(h.indexOf("#/paroisse/")===0){html=viewDetail(decodeURIComponent(h.slice(11)));nav="paroisse";}
+  else if(h==="#/liturgie"){html=viewLiturgie();nav="liturgie";}
+  else if(h.indexOf("#/liturgie/")===0){html=viewLiturgieGuide(h.slice(11));nav="liturgie";}
+  else if(h==="#/feuillet"){html=viewFeuillet();nav="liturgie";}
+  else if(h==="#/benevoles"){html=viewBenevoles();nav="benevoles";}
+  else if(h==="#/rapports"){html=viewRapports();nav="rapports";}
+  else if(h==="#/parametres"){html=viewParametres();nav="parametres";}
+  else html=viewAccueil();
+  app.innerHTML=html; window.scrollTo(0,0);
+  document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("actif",a.getAttribute("data-nav")===nav));
+  majEntete();
+}
+
+route();
+</script>
+<script>
+/* ============================================================
+   PHASE 2 — LA VIE : calendrier des événements, demandes
+   d'intentions de messe, galerie photos.
+   ============================================================ */
+Object.assign(TR.fr,{
+  nav_evenements:"Événements",nav_galerie:"Galerie",
+  ev_titre:"Calendrier des événements",
+  ev_intro:"Toute la vie de l'unité pastorale : célébrations spéciales, soupers-bénéfices, réunions, pèlerinages. L'horaire régulier des messes se trouve dans « Vie liturgique ».",
+  ev_vide:"Aucun événement à l'agenda pour le moment. L'équipe pastorale peut en ajouter dans Paramètres.",
+  ev_a_venir:"À venir",ev_tout:"Tout le calendrier",
+  gal_titre:"Galerie photos",
+  gal_intro:"La vie de l'unité en images : nos églises, nos célébrations, nos rassemblements. Cliquez sur une photo pour l'agrandir.",
+  gal_vide:"D'autres photos s'ajouteront au fil des célébrations.",
+  int_titre:"Intention de messe",
+  int_resume:"Demander qu'une messe soit célébrée pour une personne défunte ou pour une intention particulière (malade, action de grâces, anniversaire…).",
+  int_btn:"Demander une intention de messe",
+  int_pour:"Nom de la personne ou de l'intention *",
+  int_type:"Type d'intention",
+  int_defunt:"Pour une personne défunte",
+  int_vivant:"Intention particulière",
+  int_date:"Date souhaitée (facultatif)",
+  int_messe:"Messe souhaitée",
+  int_libre:"Peu importe — la première messe disponible",
+  int_offrande:"L'offrande pour une intention de messe se remet au secrétariat ou à la sacristie avant la messe.",
+  int_envoyer:"Envoyer la demande",
+  int_merci:"Merci ! Votre demande d'intention de messe a été envoyée. Notez votre référence :",
+  int_suivi_note:"Conservez-la précieusement : elle vous permettra de suivre votre demande dans « Suivre ma demande ».",
+  sti_nouvelle:"Nouvelle demande",sti_planifiee:"Planifiée",sti_celebree:"Célébrée",
+  msg_int_nouvelle:"Votre demande d'intention de messe a bien été reçue. L'équipe pastorale la planifiera lors d'une prochaine messe.",
+  msg_int_planifiee:"Votre intention est prévue : ",
+  msg_int_celebree:"La messe pour votre intention a été célébrée. Que Dieu vous bénisse !"
+});
+Object.assign(TR.en,{
+  nav_evenements:"Events",nav_galerie:"Gallery",
+  ev_titre:"Events calendar",
+  ev_intro:"All the life of the pastoral unit: special celebrations, benefit suppers, meetings, pilgrimages. The regular Mass schedule is in “Liturgical life”.",
+  ev_vide:"No events scheduled at this time. The pastoral team can add some in Settings.",
+  ev_a_venir:"Coming up",ev_tout:"Full calendar",
+  gal_titre:"Photo gallery",
+  gal_intro:"The life of the unit in pictures: our churches, our celebrations, our gatherings. Click a photo to enlarge it.",
+  gal_vide:"More photos will be added as celebrations take place.",
+  int_titre:"Mass intention",
+  int_resume:"Ask for a Mass to be celebrated for a deceased person or for a special intention (illness, thanksgiving, anniversary…).",
+  int_btn:"Request a Mass intention",
+  int_pour:"Name of the person or of the intention *",
+  int_type:"Type of intention",
+  int_defunt:"For a deceased person",
+  int_vivant:"Special intention",
+  int_date:"Preferred date (optional)",
+  int_messe:"Preferred Mass",
+  int_libre:"Any — the first available Mass",
+  int_offrande:"The offering for a Mass intention is given to the parish office or at the sacristy before Mass.",
+  int_envoyer:"Send the request",
+  int_merci:"Thank you! Your Mass intention request has been sent. Write down your reference:",
+  int_suivi_note:"Keep it safe: it lets you follow your request in “Track my request”.",
+  sti_nouvelle:"New request",sti_planifiee:"Scheduled",sti_celebree:"Celebrated",
+  msg_int_nouvelle:"Your Mass intention request has been received. The pastoral team will schedule it for an upcoming Mass.",
+  msg_int_planifiee:"Your intention is scheduled: ",
+  msg_int_celebree:"The Mass for your intention has been celebrated. God bless you!"
+});
+
+/* ---------- Stockage ---------- */
+function chargerEvenements(){try{return JSON.parse(localStorage.getItem("pa_evenements"))||[];}catch(e){return [];}}
+function sauverEvenements(x){localStorage.setItem("pa_evenements",JSON.stringify(x));}
+function chargerIntentions(){try{return JSON.parse(localStorage.getItem("pa_intentions"))||[];}catch(e){return [];}}
+function sauverIntentions(x){localStorage.setItem("pa_intentions",JSON.stringify(x));}
+
+const STATUTS_INT=[{id:"nouvelle",nom:"Nouvelle demande"},{id:"planifiee",nom:"Planifiée"},{id:"celebree",nom:"Célébrée"}];
+const INT_BADGE={nouvelle:"st-nouvelle",planifiee:"st-preparation",celebree:"st-celebree"};
+function nomStatutInt(id){const s=STATUTS_INT.find(s=>s.id===id);return s?s.nom:id;}
+function progressionIntHTML(statut){
+  const idx=STATUTS_INT.findIndex(s=>s.id===statut);
+  return '<div class="progression">'+STATUTS_INT.map((s,i)=>{
+    const cls=i<idx?"pas fait":(i===idx?"pas courant":"pas");
+    return '<div class="'+cls+'">'+t("sti_"+s.id)+"</div>";
+  }).join("")+"</div>";
+}
+
+/* ---------- Événements ---------- */
+function dateEv(e){return e.date+"T"+(e.heure||"00:00");}
+function dateLocaleEv(d){const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d);return m?new Date(+m[1],+m[2]-1,+m[3]):new Date(d);}
+function evenementsAvenir(){
+  const auj=new Date(); auj.setHours(0,0,0,0);
+  return chargerEvenements().filter(e=>dateLocaleEv(e.date)>=auj).sort((a,b)=>dateEv(a).localeCompare(dateEv(b)));
+}
+function ligneEvenement(e){
+  const dt=dateLocaleEv(e.date);
+  const mois=dt.toLocaleDateString(lang()==="en"?"en-CA":"fr-CA",{month:"short"}).replace(/\./g,"");
+  return '<div class="ev-ligne"><div class="ev-date"><span class="j">'+dt.getDate()+'</span><span class="m">'+esc(mois)+'</span></div>'
+    +'<div class="ev-corps"><strong>'+esc(e.titre)+'</strong>'
+    +'<span class="discret">'+(e.heure?esc(e.heure)+(e.lieu?" — ":""):"")+esc(e.lieu||"")+'</span>'
+    +(e.desc?'<br>'+esc(e.desc):"")+'</div></div>';
+}
+function moisAnneeEv(cle){
+  const dt=dateLocaleEv(cle+"-01");
+  return dt.toLocaleDateString(lang()==="en"?"en-CA":"fr-CA",{month:"long",year:"numeric"});
+}
+function viewEvenements(){
+  const ev=evenementsAvenir();
+  let corps;
+  if(!ev.length) corps='<p class="discret">'+t("ev_vide")+'</p>';
+  else{
+    const groupes={},ordre=[];
+    ev.forEach(e=>{const k=e.date.slice(0,7);if(!groupes[k]){groupes[k]=[];ordre.push(k);}groupes[k].push(e);});
+    corps=ordre.map(k=>'<h3 style="text-transform:capitalize">'+moisAnneeEv(k)+'</h3>'+groupes[k].map(ligneEvenement).join("")).join("");
+  }
+  return '<a class="retour" href="#/">&larr; '+t("retour_accueil").replace(/^← /,"")+'</a>'
+    +'<div class="carte"><h2>📅 '+t("ev_titre")+'</h2><p class="discret">'+t("ev_intro")+'</p>'+corps+'</div>';
+}
+function blocAVenir(){
+  const ev=evenementsAvenir().slice(0,3);
+  if(!ev.length) return "";
+  return '<div class="carte"><h2>📅 '+t("ev_a_venir")+'</h2>'+ev.map(ligneEvenement).join("")
+    +'<p style="margin:8px 0 0"><a href="#/evenements">'+t("ev_tout")+' &rarr;</a></p></div>';
+}
+
+/* ---------- Galerie photos ---------- */
+const GALERIE_BASE=[
+  {img:"images/assomption-exterieur.jpg",fr:"Église de l'Assomption — extérieur",en:"Church of the Assumption — exterior"},
+  {img:"images/assomption-interieur.jpg",fr:"Église de l'Assomption — intérieur",en:"Church of the Assumption — interior"},
+  {img:"images/saint-georges.jpg",fr:"Église Saint-Georges",en:"Saint-Georges church"},
+  {img:"images/saint-andre.jpg",fr:"Église Saint-André",en:"Saint-André church"},
+  {img:"images/saint-michel.jpg",fr:"Église Saint-Michel",en:"Saint-Michel church"}
+];
+function photosGalerie(){
+  const extra=(params().galerie||"").split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{
+    const parts=l.split("|").map(x=>x.trim());
+    return {img:parts[0],fr:parts[1]||"",en:parts[2]||parts[1]||""};
+  }).filter(x=>x.img);
+  return GALERIE_BASE.concat(extra);
+}
+function viewGalerie(){
+  const items=photosGalerie().map(x=>{
+    const leg=lang()==="en"?x.en:x.fr;
+    return '<figure class="galerie-item"><a href="'+encodeURI(x.img)+'" target="_blank" rel="noopener"><img src="'+encodeURI(x.img)+'" alt="'+esc(leg)+'" loading="lazy"></a><figcaption>'+esc(leg)+'</figcaption></figure>';
+  }).join("");
+  return '<a class="retour" href="#/">&larr; '+t("retour_accueil").replace(/^← /,"")+'</a>'
+    +'<div class="carte"><h2>📷 '+t("gal_titre")+'</h2><p class="discret">'+t("gal_intro")+'</p>'
+    +'<div class="galerie-grille">'+items+'</div><p class="discret" style="margin-top:10px">'+t("gal_vide")+'</p></div>';
+}
+
+/* ---------- Intentions de messe ---------- */
+function viewIntention(){
+  const messes=chargerMesses().slice().sort((a,b)=>a.jour-b.jour||String(a.heure).localeCompare(String(b.heure)));
+  const opts=messes.map(m=>{
+    const l=nomJour(m.jour)+" "+m.heure+" — "+m.paroisse;
+    return '<option value="'+esc(l)+'">'+esc(l)+'</option>';
+  }).join("");
+  return '<a class="retour" href="#/liturgie">'+t("retour_lit")+'</a>'
+    +'<div class="carte"><h2>🕯️ '+t("int_titre")+'</h2><p>'+t("int_resume")+'</p></div>'
+    +'<form class="carte" id="formIntention"><h2>'+t("int_btn")+'</h2>'
+    +'<label for="i-pour">'+t("int_pour")+'</label><input id="i-pour" required>'
+    +'<label>'+t("int_type")+'</label><div class="actions-ligne" style="margin:0 0 12px">'
+    +'<label style="font-weight:400"><input type="radio" name="i-type" value="defunt" checked style="width:auto"> '+t("int_defunt")+'</label>'
+    +'<label style="font-weight:400"><input type="radio" name="i-type" value="vivant" style="width:auto"> '+t("int_vivant")+'</label></div>'
+    +'<div class="deux-col"><div><label for="i-date">'+t("int_date")+'</label><input id="i-date" type="date"></div>'
+    +'<div><label for="i-messe">'+t("int_messe")+'</label><select id="i-messe"><option value="">'+t("int_libre")+'</option>'+opts+'</select></div></div>'
+    +'<div class="deux-col"><div><label for="i-nom">'+t("l_nom")+'</label><input id="i-nom" required></div>'
+    +'<div><label for="i-tel">'+t("l_tel")+'</label><input id="i-tel" type="tel" required></div></div>'
+    +'<label for="i-courriel">'+t("l_courriel")+'</label><input id="i-courriel" type="email">'
+    +'<div class="encart">'+t("int_offrande")+'</div>'
+    +'<button class="btn" type="submit">'+t("int_envoyer")+'</button></form>';
+}
+
+document.addEventListener("submit",function(e){
+  if(e.target.id!=="formIntention")return;
+  e.preventDefault();e.stopImmediatePropagation();
+  const type=document.querySelector('input[name="i-type"]:checked');
+  const liste=chargerIntentions();
+  const ref=genererRef("intention");
+  liste.push({ref:ref,intention:document.getElementById("i-pour").value,
+    type:type?type.value:"defunt",
+    dateSouhaitee:document.getElementById("i-date").value||"",
+    messe:document.getElementById("i-messe").value||"",
+    contact:{nom:document.getElementById("i-nom").value,tel:document.getElementById("i-tel").value,courriel:document.getElementById("i-courriel").value},
+    dateDemande:new Date().toISOString().slice(0,10),statut:"nouvelle",messePrevue:"",note:""});
+  sauverIntentions(liste);
+  e.target.innerHTML='<div class="encart vert"><strong>'+t("int_merci")+'</strong></div><p class="ref-num">'+esc(ref)+'</p>'
+    +'<p class="discret">'+t("int_suivi_note")+'</p>'
+    +'<div class="actions-ligne"><a class="btn secondaire" href="#/suivi">'+t("btn_suivi")+'</a><a class="btn secondaire" href="#/">'+t("retour_accueil").replace(/^← /,"")+'</a></div>';
+},true);
+
+/* ---------- Éditeur d'événements (Paramètres) ---------- */
+function editeurEvenements(){
+  const ev=chargerEvenements().slice().sort((a,b)=>dateEv(a).localeCompare(dateEv(b)));
+  const lignes=ev.length?ev.map(e=>'<tr><td>'+formatDate(e.date)+'</td><td>'+esc(e.heure||"")+'</td><td>'+esc(e.titre)+'</td><td>'+esc(e.lieu||"")+'</td><td><button class="btn petit secondaire" data-supp-ev="'+e.id+'">Retirer</button></td></tr>').join("")
+    :'<tr><td colspan="5" class="discret">Aucun événement. Ajoutez le premier ci-dessous.</td></tr>';
+  return '<p class="discret">Les événements s\'affichent sur la page d\'accueil (« À venir », les 3 prochains) et dans l\'onglet Événements. Rédigez les titres en français, en anglais ou dans les deux langues, au choix.</p>'
+    +'<div style="overflow-x:auto"><table><thead><tr><th>Date</th><th>Heure</th><th>Événement</th><th>Lieu</th><th></th></tr></thead><tbody>'+lignes+'</tbody></table></div>'
+    +'<div class="actions-ligne" style="flex-wrap:wrap"><input id="ev-date" type="date"><input id="ev-heure" type="time" style="max-width:110px"><input id="ev-titre" placeholder="Titre de l\'événement" style="flex:1;min-width:180px"><input id="ev-lieu" placeholder="Lieu (ex. : église Saint-Georges)" style="flex:1;min-width:160px"></div>'
+    +'<div class="actions-ligne"><input id="ev-desc" placeholder="Précisions (facultatif)" style="flex:1;min-width:220px"><button class="btn petit" id="btn-ajout-ev">Ajouter</button></div>';
+}
+
+/* ---------- Suivi : intentions en plus des sacrements ---------- */
+function renderSuivi(ref){
+  const zone=document.getElementById("suivi-resultat");
+  const d=chargerDemandes().find(x=>x.ref.toUpperCase()===ref.toUpperCase());
+  if(!d){
+    const it=chargerIntentions().find(x=>x.ref.toUpperCase()===ref.toUpperCase());
+    if(!it){zone.innerHTML='<div class="encart rouge">'+t("suivi_introuvable")+'</div>';return;}
+    let msg=t("msg_int_"+it.statut);
+    if(it.statut==="planifiee"&&it.messePrevue) msg+=esc(it.messePrevue);
+    zone.innerHTML='<h3 style="margin-top:22px">🕯️ '+t("int_titre")+' — '+esc(it.intention)+'</h3>'
+      +progressionIntHTML(it.statut)+'<div class="encart bleu">'+msg+'</div>';
+    return;
+  }
+  const s=sacrement(d.sacrement);
+  let message=t("msg_"+d.statut);
+  if(d.statut==="celebree"){
+    if(d.dateCelebration) message+=lang()==="en"?(" on "+formatDate(d.dateCelebration)):(" le "+formatDate(d.dateCelebration));
+    message+=lang()==="en"?". God bless you!":". Que Dieu vous bénisse !";
+  }
+  zone.innerHTML='<h3 style="margin-top:22px">'+esc(sacNom(s))+' — '+esc(d.paroisse)+'</h3>'
+    +progressionHTML(d.statut)+'<div class="encart bleu">'+message+'</div>';
+}
+
+/* ---------- Espace paroisse : demandes + intentions ---------- */
+function viewParoisse(){
+  const demandes=chargerDemandes();
+  const paroisses=chargerParoisses();
+  const boutons=['<button data-fstatut="tous" class="'+(FILTRE_STATUT==="tous"?"actif":"")+'">Toutes</button>']
+    .concat(STATUTS.map(s=>'<button data-fstatut="'+s.id+'" class="'+(FILTRE_STATUT===s.id?"actif":"")+'">'+s.nom+'</button>')).join("");
+  const selPar='<select id="filtre-paroisse" style="max-width:260px"><option value="toutes">Toutes les paroisses</option>'
+    +paroisses.map(x=>'<option '+(FILTRE_PAROISSE===x?"selected":"")+'>'+esc(x)+'</option>').join("")+'</select>';
+  const liste=demandes.filter(d=>(FILTRE_STATUT==="tous"||d.statut===FILTRE_STATUT)&&(FILTRE_PAROISSE==="toutes"||d.paroisse===FILTRE_PAROISSE))
+    .sort((a,b)=>(b.dateDemande||"").localeCompare(a.dateDemande||""));
+  const lignes=liste.length?liste.map(d=>{
+    const s=sacrement(d.sacrement);
+    return '<tr class="cliquable" data-detail="'+d.ref+'"><td><strong>'+esc(d.ref)+'</strong></td><td>'+s.icone+' '+esc(s.nom)+'</td><td>'+esc(d.paroisse)+'</td><td>'+esc(d.contact.nom)+'</td><td>'+formatDate(d.dateDemande)+'</td><td>'+(d.statut==="celebree"?formatDate(d.dateCelebration):formatDate(d.dateSouhaitee))+'</td><td><span class="badge st-'+d.statut+'">'+nomStatut(d.statut)+'</span></td></tr>';
+  }).join(""):'<tr><td colspan="7" class="discret">Aucune demande pour ce filtre.</td></tr>';
+  const ints=chargerIntentions().slice().sort((a,b)=>(b.dateDemande||"").localeCompare(a.dateDemande||""));
+  const lignesInt=ints.length?ints.map(x=>'<tr class="cliquable" data-detail="'+x.ref+'"><td><strong>'+esc(x.ref)+'</strong></td><td>'+esc(x.intention)+'</td><td>'+(x.type==="defunt"?"Défunt":"Intention particulière")+'</td><td>'+esc(x.contact.nom)+'</td><td>'+formatDate(x.dateDemande)+'</td><td>'+(x.messePrevue?esc(x.messePrevue):(x.messe?esc(x.messe):"—"))+'</td><td><span class="badge '+INT_BADGE[x.statut]+'">'+nomStatutInt(x.statut)+'</span></td></tr>').join("")
+    :'<tr><td colspan="7" class="discret">Aucune intention de messe pour le moment.</td></tr>';
+  return '<div class="carte"><h2>Espace paroisse — suivi des demandes</h2>'
+    +'<p class="discret">Réservé à l\'équipe pastorale. Chaque demande suit le parcours : <em>demande → instruction → préparation → célébration</em>. Cliquez sur une ligne pour ouvrir la fiche.</p>'
+    +'<div class="filtres">'+boutons+'</div><div style="margin-bottom:12px">'+selPar+'</div>'
+    +'<div style="overflow-x:auto"><table><thead><tr><th>Réf.</th><th>Sacrement</th><th>Paroisse</th><th>Demandeur</th><th>Reçue le</th><th>Date visée / célébrée</th><th>Étape</th></tr></thead><tbody>'+lignes+'</tbody></table></div></div>'
+    +'<div class="carte"><h2>🕯️ Intentions de messe</h2>'
+    +'<p class="discret">Parcours : <em>nouvelle → planifiée → célébrée</em>. Cliquez sur une ligne pour planifier la messe ou inscrire une note.</p>'
+    +'<div style="overflow-x:auto"><table><thead><tr><th>Réf.</th><th>Intention</th><th>Type</th><th>Demandeur</th><th>Reçue le</th><th>Messe prévue</th><th>Étape</th></tr></thead><tbody>'+lignesInt+'</tbody></table></div></div>';
+}
+
+/* ---------- Fiche intention (arrière-guichet) ---------- */
+function viewDetailIntention(ref){
+  const liste=chargerIntentions();
+  const it=liste.find(x=>x.ref===ref);
+  if(!it) return viewParoisse();
+  const typeLib=it.type==="defunt"?"Pour une personne défunte":"Intention particulière";
+  let planBloc;
+  if(it.statut==="nouvelle") planBloc='<label for="int-messe-prevue">Messe prévue (date, heure, église)</label><input id="int-messe-prevue" value="'+esc(it.messePrevue||"")+'" placeholder="Ex. : dimanche 21 septembre, 10h30 — Assomption">';
+  else if(it.statut==="planifiee") planBloc='<p><span class="detail-cle">Messe prévue :</span> '+esc(it.messePrevue)+'</p>';
+  else planBloc='<div class="encart vert">Intention célébrée. Pensez à inscrire l\'offrande à la recette « Messes » du mois.</div>';
+  const btns=(it.statut==="nouvelle"?'<button class="btn petit" data-int-plan="'+it.ref+'">Marquer planifiée &rarr;</button>':"")
+    +(it.statut==="planifiee"?'<button class="btn petit" data-int-cel="'+it.ref+'">Marquer célébrée ✓</button>':"");
+  return '<a class="retour" href="#/paroisse">&larr; Espace paroisse</a>'
+    +'<div class="carte"><h2>🕯️ Intention de messe — '+esc(it.ref)+'</h2>'
+    +progressionIntHTML(it.statut)
+    +'<div class="deux-col"><div><h3>Demande</h3>'
+    +'<p><span class="detail-cle">Intention :</span> '+esc(it.intention)
+    +'<br><span class="detail-cle">Type :</span> '+typeLib
+    +(it.dateSouhaitee?'<br><span class="detail-cle">Date souhaitée :</span> '+formatDate(it.dateSouhaitee):"")
+    +(it.messe?'<br><span class="detail-cle">Messe souhaitée :</span> '+esc(it.messe):"")
+    +'<br><span class="detail-cle">Reçue le :</span> '+formatDate(it.dateDemande)+'</p>'
+    +'<h3>Contact</h3><p>'+esc(it.contact.nom)+'<br>Tél. : '+esc(it.contact.tel)+(it.contact.courriel?'<br>Courriel : '+esc(it.contact.courriel):"")+'</p></div>'
+    +'<div><h3>Planification</h3>'+planBloc
+    +'<div class="actions-ligne">'+btns+'</div></div></div>'
+    +'<h3>Note pastorale (interne)</h3><textarea id="note-int" data-ref="'+it.ref+'" placeholder="Observations, suites à donner…">'+esc(it.note||"")+'</textarea></div>';
+}
+
+function viewDetail(ref){
+  if(String(ref).indexOf("INT-")===0) return viewDetailIntention(ref);
+  const demandes=chargerDemandes();
+  const d=demandes.find(x=>x.ref===ref);
+  if(!d) return viewParoisse();
+  const s=sacrement(d.sacrement);
+  const details=(d.details||[]).map(x=>'<p><span class="detail-cle">'+esc(x.label)+' :</span> '+esc(x.valeur)+'</p>').join("");
+  const check='<div class="check">'+s.checklist.map((c,i)=>{
+    const ok=d.checklist&&d.checklist[i];
+    return '<label><input type="checkbox" data-check="'+i+'" data-ref="'+d.ref+'" '+(ok?"checked":"")+'> '+esc(c)+'</label>';
+  }).join("")+'</div>';
+  const termine=d.statut==="celebree";
+  const btnSuite=termine?"":'<button class="btn petit" data-avancer="'+d.ref+'">Passer à l\'étape suivante &rarr;</button>';
+  const champDate=(d.statut==="prete")?'<label for="date-celebration">Date de la célébration</label><input type="date" id="date-celebration" style="max-width:240px">':"";
+  return '<a class="retour" href="#/paroisse">&larr; Toutes les demandes</a>'
+    +'<div class="carte"><h2>'+s.icone+' '+esc(s.nom)+' — '+esc(d.ref)+'</h2>'
+    +progressionHTML(d.statut)
+    +'<div class="deux-col"><div>'
+    +'<h3>Demande</h3>'
+    +'<p><span class="detail-cle">Paroisse :</span> '+esc(d.paroisse)+'<br><span class="detail-cle">Reçue le :</span> '+formatDate(d.dateDemande)+'<br><span class="detail-cle">Date souhaitée :</span> '+formatDate(d.dateSouhaitee)+'</p>'
+    +details
+    +'<h3>Contact</h3><p>'+esc(d.contact.nom)+'<br>Tél. : '+esc(d.contact.tel)+(d.contact.courriel?'<br>Courriel : '+esc(d.contact.courriel):"")+'</p>'
+    +'</div><div>'
+    +'<h3>Liste de contrôle canonique</h3>'+check
+    +champDate
+    +'<div class="actions-ligne">'+btnSuite+'</div>'
+    +(termine&&d.dateCelebration?'<div class="encart vert">Célébrée le '+formatDate(d.dateCelebration)+'. Pensez à l\'inscription au registre.</div>':"")
+    +'</div></div>'
+    +'<h3>Note pastorale (interne)</h3><textarea id="note-interne" data-ref="'+d.ref+'" placeholder="Observations, suites à donner…">'+esc(d.note||"")+'</textarea>'
+    +'</div>';
+}
+
+/* ---------- Accueil : bloc « À venir » ---------- */
+function viewAccueil(){
+  const p=params();
+  const tuiles=SACREMENTS.map(s=>{
+    const c=sacContent(s);
+    return '<a class="tuile" href="#/demande/'+s.id+'"><div class="icone">'+s.icone+'</div><strong>'+sacNom(s)+'</strong><span>'+esc(c.resume)+'</span></a>';
+  }).join("");
+  return '<div class="hero"><div class="hero-fond" style="background-image:url(\'images/assomption-exterieur.jpg\')"></div>'
+    +'<div class="hero-contenu"><h2>'+t("hero_titre")+'</h2><p>'+t("hero_texte")+'</p>'
+    +'<div class="actions-ligne" style="margin:0"><a class="btn hero-btn" href="#/demande">'+t("btn_demande")+'</a><a class="btn hero-btn2" href="#/suivi">'+t("btn_suivi")+'</a></div></div></div>'
+    +'<div class="carte"><div class="encart rouge" style="margin:0">'+t("urgence")+(p.telephone?(lang()==="en"?" at <strong>"+esc(p.telephone)+"</strong>":" au <strong>"+esc(p.telephone)+"</strong>"):"")+'</div></div>'
+    +blocAnnonces()
+    +blocAVenir()
+    +'<div class="carte"><h2>'+t("eglises_titre")+'</h2><div class="eglises-grille">'+cartesEglises()+'</div></div>'
+    +'<div class="carte"><h2>'+t("sacrements_titre")+'</h2><div class="grille">'+tuiles+'</div></div>';
+}
+
+/* ---------- Vie liturgique : carte intention de messe ---------- */
+function viewLiturgie(){
+  const p=params();
+  const tuiles=GUIDES_LITURGIQUES.map(g0=>{
+    const g=guiContent(g0);
+    const prochaines=datesGuide(g.id);
+    const libelle=prochaines.length?t("prochain")+" "+prochaines[0].label+" — "+plage(prochaines[0].debut,prochaines[0].fin):"";
+    return '<a class="tuile" href="#/liturgie/'+g.id+'"><div class="icone">'+g.icone+'</div><strong>'+esc(g.nom)+'</strong><span>'+esc(g.resume)+'</span><br><span class="discret">'+libelle+'</span></a>';
+  }).join("");
+  const tuilesAnnee='<a class="tuile" href="#/liturgie/calendrier"><div class="icone">🗓️</div><strong>'+t("cal_titre")+'</strong><span>'+t("cal_resume")+'</span></a>'
+    +'<a class="tuile" href="#/liturgie/prieres"><div class="icone">🙏</div><strong>'+t("pri_titre")+'</strong><span>'+t("pri_resume")+'</span></a>'
+    +'<a class="tuile" href="#/liturgie/visuel"><div class="icone">🎨</div><strong>'+t("vis_titre")+'</strong><span>'+t("vis_resume")+'</span></a>';
+  const carteFeuillet='<div class="carte"><h2>📰 '+t("feuillet_titre")+'</h2>'
+    +'<p>'+t("feuillet_resume")+'</p>'
+    +'<div class="actions-ligne" style="margin:0"><a class="btn petit" href="#/feuillet">'+t("voir_feuillet")+'</a></div></div>';
+  const carteIntention='<div class="carte"><h2>🕯️ '+t("int_titre")+'</h2>'
+    +'<p>'+t("int_resume")+'</p>'
+    +'<div class="actions-ligne" style="margin:0"><a class="btn petit" href="#/intention">'+t("int_btn")+'</a></div></div>';
+  const guides=p.guides_diocesains?'<div class="encart"><strong>'+(lang()==="en"?"Diocesan documents for the current year":"Documents du diocèse pour l'année en cours")+'</strong><br>'+esc(p.guides_diocesains).replace(/\n/g,"<br>")+'</div>':"";
+  const intro=lang()==="en"
+    ?"Each year, the diocese publishes documents for the great celebrations of the liturgical year: Advent and Lent penitential celebrations, the Christmas Eve vigil, the Easter Triduum. This section gathers practical guides — order of celebration, parish preparation and liturgical references — with automatically computed dates."
+    :"Chaque année, le diocèse propose des documents pour les grandes célébrations de l'année liturgique : célébrations pénitentielles de l'Avent et du Carême, veillée de Noël, Triduum pascal. Cette section rassemble des guides pratiques — déroulé de la célébration, préparation paroissiale et repères liturgiques — avec les dates calculées automatiquement.";
+  const sources=lang()==="en"
+    ?"Usual sources of the unit: for the francophone community, the journal « Vie liturgique » (Novalis) and « Vivre et célébrer » (National Office of Liturgy, CCCB); for the anglophone community, publications of the CCCB English sector (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Each guide recalls them."
+    :"Sources habituelles de l'unité : pour la communauté francophone, la revue « Vie liturgique » (Novalis) et « Vivre et célébrer » (Office national de liturgie de la CECC) ; pour la communauté anglophone, les publications du secteur anglais de la CECC (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Chaque guide les rappelle.";
+  return '<div class="bande-photo" style="background-image:url(\'images/assomption-interieur.jpg\')"></div>'
+    +carteMesses()
+    +'<div class="deux-col">'+carteFeuillet+carteIntention+'</div>'
+    +'<div class="carte"><h2>'+t("lit_titre")+'</h2>'
+    +'<p>'+intro+'</p><p class="discret">'+sources+'</p>'
+    +guides
+    +'<div class="grille">'+tuiles+'</div>'
+    +'<h3>'+t("annee_lit")+'</h3><div class="grille">'+tuilesAnnee+'</div></div>';
+}
+
+/* ---------- Liste des demandes : tuile intention ---------- */
+function viewDemandeListe(){
+  const tuiles=SACREMENTS.map(s=>{
+    const c=sacContent(s);
+    return '<a class="tuile" href="#/demande/'+s.id+'"><div class="icone">'+s.icone+'</div><strong>'+sacNom(s)+'</strong><span>'+esc(c.resume)+'</span></a>';
+  }).join("");
+  const tuileInt='<a class="tuile" href="#/intention"><div class="icone">🕯️</div><strong>'+t("int_titre")+'</strong><span>'+t("int_resume")+'</span></a>';
+  return '<a class="retour" href="#/">&larr; '+t("retour_accueil").replace(/^← /,"")+'</a><div class="carte"><h2>'+t("demande_titre")+'</h2>'
+    +'<p class="discret">'+t("demande_intro")+'</p>'
+    +'<div class="grille">'+tuiles+'</div>'
+    +'<h3 style="margin-top:16px">'+t("int_titre")+'</h3><div class="grille">'+tuileInt+'</div></div>';
+}
+
+/* ---------- Handlers phase 2 ---------- */
+document.addEventListener("click",function(e){
+  const c=e.target;
+  if(c.id==="btn-ajout-ev"){
+    const titre=document.getElementById("ev-titre").value.trim();
+    const date=document.getElementById("ev-date").value;
+    if(!date||!titre){alert("La date et le titre de l'événement sont requis.");return;}
+    const ev=chargerEvenements();
+    ev.push({id:"ev"+Date.now().toString(36),date:date,heure:document.getElementById("ev-heure").value,
+      titre:titre,lieu:document.getElementById("ev-lieu").value.trim(),desc:document.getElementById("ev-desc").value.trim()});
+    sauverEvenements(ev);route();return;
+  }
+  const sv=c.closest("[data-supp-ev]");
+  if(sv){sauverEvenements(chargerEvenements().filter(x=>x.id!==sv.getAttribute("data-supp-ev")));route();return;}
+  const ip=c.closest("[data-int-plan]");
+  if(ip){
+    const liste=chargerIntentions();const it=liste.find(x=>x.ref===ip.getAttribute("data-int-plan"));if(!it)return;
+    const champ=document.getElementById("int-messe-prevue");
+    const val=champ?champ.value.trim():"";
+    if(!val){alert("Indiquez la messe prévue avant de marquer l'intention comme planifiée.");return;}
+    it.messePrevue=val;it.statut="planifiee";sauverIntentions(liste);route();return;
+  }
+  const ic=c.closest("[data-int-cel]");
+  if(ic){const liste=chargerIntentions();const it=liste.find(x=>x.ref===ic.getAttribute("data-int-cel"));if(it){it.statut="celebree";sauverIntentions(liste);}route();return;}
+});
+document.addEventListener("change",function(e){
+  const c=e.target;
+  if(c.id==="note-int"){
+    const liste=chargerIntentions();const it=liste.find(x=>x.ref===c.getAttribute("data-ref"));
+    if(it){it.note=c.value;sauverIntentions(liste);}return;
+  }
+});
+
+/* ---------- Routeur : nouvelles routes phase 2 ---------- */
+function route(){
+  const h=location.hash||"#/"; const app=document.getElementById("app");
+  let nav="accueil", html="";
+  if(h==="#/"||h==="#") html=viewAccueil();
+  else if(h==="#/demande"){html=viewDemandeListe();nav="demande";}
+  else if(h.indexOf("#/demande/")===0){html=viewDemandeForm(h.slice(10));nav="demande";}
+  else if(h.indexOf("#/confirmation/")===0){html=viewConfirmation(decodeURIComponent(h.slice(15)));nav="suivi";}
+  else if(h==="#/suivi"){html=viewSuivi();nav="suivi";}
+  else if(h==="#/paroisse"){html=viewParoisse();nav="paroisse";}
+  else if(h.indexOf("#/paroisse/")===0){html=viewDetail(decodeURIComponent(h.slice(11)));nav="paroisse";}
+  else if(h==="#/liturgie"){html=viewLiturgie();nav="liturgie";}
+  else if(h.indexOf("#/liturgie/")===0){html=viewLiturgieGuide(h.slice(11));nav="liturgie";}
+  else if(h==="#/feuillet"){html=viewFeuillet();nav="liturgie";}
+  else if(h==="#/intention"){html=viewIntention();nav="liturgie";}
+  else if(h==="#/evenements"){html=viewEvenements();nav="evenements";}
+  else if(h==="#/galerie"){html=viewGalerie();nav="galerie";}
+  else if(h==="#/benevoles"){html=viewBenevoles();nav="benevoles";}
+  else if(h==="#/rapports"){html=viewRapports();nav="rapports";}
+  else if(h==="#/parametres"){html=viewParametres();nav="parametres";}
+  else html=viewAccueil();
+  app.innerHTML=html; window.scrollTo(0,0);
+  document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("actif",a.getAttribute("data-nav")===nav));
+  majEntete();
+}
+
+/* ---------- Préremplissage v5 : événements et intention de démonstration ---------- */
+if(!localStorage.getItem("pa_seed_v5")){
+  if(!localStorage.getItem("pa_evenements")) sauverEvenements([
+    {id:"ev-demo1",date:"2026-09-14",heure:"",titre:"Rentrée de la catéchèse — inscriptions",lieu:"Après les messes / After Masses",desc:""},
+    {id:"ev-demo2",date:"2026-09-21",heure:"17:00",titre:"Souper-bénéfice / Benefit supper",lieu:"Salle paroissiale Saint-Georges",desc:"Billets au secrétariat / Tickets at the parish office"}
+  ]);
+  if(!localStorage.getItem("pa_intentions")) sauverIntentions([
+    {ref:"INT-2026-D3M0",intention:"Georges Roy",type:"defunt",dateSouhaitee:"",messe:"",
+     contact:{nom:"Paul Roy",tel:"506-555-0104",courriel:""},dateDemande:"2026-08-01",
+     statut:"planifiee",messePrevue:"Dimanche 14 septembre, 10h30 — Assomption",note:""}
+  ]);
+  localStorage.setItem("pa_seed_v5","1");
+}
+
+route();
+</script>
+</body>
+</html>
