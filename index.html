@@ -2448,7 +2448,7 @@ function viewParametres(){
     +'<label for="p-annonces">Nouvelles et annonces — une par ligne (affichées sur la page d\'accueil)</label><textarea id="p-annonces" placeholder="Ex. : Rentrée de la catéchèse — inscription le 14 septembre après les messes&#10;Souper-bénéfice de Saint-Georges, le 21 septembre à 17h">'+esc(p.annonces||"")+'</textarea>'
     +'<label for="p-feuillet-date">Date du feuillet (dimanche concerné)</label><input id="p-feuillet-date" type="date" value="'+esc(p.feuillet_date||"")+'">'
     +'<label for="p-feuillet">Feuillet paroissial — texte du dimanche, collé par l\'équipe pastorale (laisser une ligne vide entre les paragraphes)</label><textarea id="p-feuillet" rows="8" placeholder="Ex. : Intentions de messe de la semaine…&#10;&#10;Annonces de la semaine…">'+esc(p.feuillet||"")+'</textarea>'
-    +'<label for="p-galerie">Galerie photos — ajouts (une ligne par photo : adresse de l\'image | légende française | légende anglaise)</label><textarea id="p-galerie" placeholder="Ex. : images/pelerinage-2026.jpg | Pèlerinage diocésain 2026 | Diocesan pilgrimage 2026">'+esc(p.galerie||"")+'</textarea>'
+    +'<label for="p-galerie">Galerie photos — ajouts (une ligne par photo : adresse de l\'image | légende française | légende anglaise)</label><textarea id="p-galerie" placeholder="Ex. : pelerinage-2026.jpg | Pèlerinage diocésain 2026 | Diocesan pilgrimage 2026">'+esc(p.galerie||"")+'</textarea>'
     +'<button class="btn" type="submit">Enregistrer</button></form>'
     +'<h3>Horaire des messes — temps ordinaire</h3>'+editeurMesses()
     +'<h3>Calendrier des événements</h3>'+editeurEvenements()
@@ -2889,7 +2889,7 @@ function viewLiturgie(){
   const sources=lang()==="en"
     ?"Usual sources of the unit: for the francophone community, the journal « Vie liturgique » (Novalis) and « Vivre et célébrer » (National Office of Liturgy, CCCB); for the anglophone community, publications of the CCCB English sector (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Each guide recalls them."
     :"Sources habituelles de l'unité : pour la communauté francophone, la revue « Vie liturgique » (Novalis) et « Vivre et célébrer » (Office national de liturgie de la CECC) ; pour la communauté anglophone, les publications du secteur anglais de la CECC (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Chaque guide les rappelle.";
-  return '<div class="bande-photo" style="background-image:url(\'images/assomption-interieur.jpg\')"></div>'
+  return '<div class="bande-photo" style="background-image:url(\'assomption-interieur.jpg\')"></div>'
     +carteMesses()
     +'<div class="carte"><h2>'+t("lit_titre")+'</h2>'
     +'<p>'+intro+'</p><p class="discret">'+sources+'</p>'
@@ -3020,16 +3020,16 @@ Object.assign(TR.en,{
 });
 
 const EGLISES=[
- {nom:"Assomption",img:"images/assomption-exterieur.jpg",lien:"https://diocese-edmundston.ca/fr/zp_grand-sault_assomption.html",
+ {nom:"Assomption",img:"assomption-exterieur.jpg",lien:"https://diocese-edmundston.ca/fr/zp_grand-sault_assomption.html",
   fr:"Paroisse mère de la région, érigée en 1868 : après l'incendie de 1906, son église de pierre est rebâtie et ouverte en 1909. Paroisse bilingue, la messe du vendredi, à 9h, y est célébrée en anglais.",
   en:"The mother parish of the region, erected in 1868: after the 1906 fire, its stone church was rebuilt and opened in 1909. A bilingual parish, Friday Mass at 9 a.m. is celebrated there in English."},
- {nom:"Saint-Georges",img:"images/saint-georges.jpg",lien:"https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html",
+ {nom:"Saint-Georges",img:"saint-georges.jpg",lien:"https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html",
   fr:"Érigée en 1950, la paroisse bénit son église de brique en 1953 ; une statue de saint Georges en marbre d'Italie veille sur le parvis. La messe du mardi à 19h y est précédée du chapelet et de l'adoration dès 18h.",
   en:"Erected in 1950, the parish blessed its brick church in 1953; a marble statue of Saint George carved in Italy watches over the entrance. Tuesday Mass at 7 p.m. is preceded there by the rosary and adoration from 6 p.m."},
- {nom:"Saint-André",img:"images/saint-andre.jpg",lien:"https://diocese-edmundston.ca/fr/zp_st-andre.html",
+ {nom:"Saint-André",img:"saint-andre.jpg",lien:"https://diocese-edmundston.ca/fr/zp_st-andre.html",
   fr:"L'église de Saint-André (1904), au cœur des vallons, est célèbre pour sa rosace et son intérieur tout en blanc. La messe du jeudi y est célébrée à 9h.",
   en:"The church of Saint-André (1904), nestled among the valleys, is famed for its rose window and its all-white interior. Thursday Mass is celebrated there at 9 a.m."},
- {nom:"Saint-Michel",img:"images/saint-michel.jpg",maps:"https://maps.app.goo.gl/kdBrQagZrsqnxPfT7",lien:"https://diocese-edmundston.ca/fr/zp_drummond.html",
+ {nom:"Saint-Michel",img:"saint-michel.jpg",maps:"https://maps.app.goo.gl/kdBrQagZrsqnxPfT7",lien:"https://diocese-edmundston.ca/fr/zp_drummond.html",
   fr:"Érigée en 1890, la paroisse de Drummond bâtit son église actuelle en 1906-1908, au cœur de l'une des plus belles régions agricoles du Nouveau-Brunswick. La messe du mercredi y est célébrée à 19h.",
   en:"Erected in 1890, the parish of Drummond built its present church in 1906-1908, in the heart of one of New Brunswick's finest farming regions. Wednesday Mass is celebrated there at 7 p.m."}
 ];
@@ -3051,7 +3051,7 @@ function viewAccueil(){
     const c=sacContent(s);
     return '<a class="tuile" href="#/demande/'+s.id+'"><div class="icone">'+s.icone+'</div><strong>'+sacNom(s)+'</strong><span>'+esc(c.resume)+'</span></a>';
   }).join("");
-  return '<div class="hero"><div class="hero-fond" style="background-image:url(\'images/assomption-exterieur.jpg\')"></div>'
+  return '<div class="hero"><div class="hero-fond" style="background-image:url(\'assomption-exterieur.jpg\')"></div>'
     +'<div class="hero-contenu"><h2>'+t("hero_titre")+'</h2><p>'+t("hero_texte")+'</p>'
     +'<div class="actions-ligne" style="margin:0"><a class="btn hero-btn" href="#/demande">'+t("btn_demande")+'</a><a class="btn hero-btn2" href="#/suivi">'+t("btn_suivi")+'</a></div></div></div>'
     +'<div class="carte"><div class="encart rouge" style="margin:0">'+t("urgence")+(p.telephone?(lang()==="en"?" at <strong>"+esc(p.telephone)+"</strong>":" au <strong>"+esc(p.telephone)+"</strong>"):"")+'</div></div>'
@@ -3117,7 +3117,7 @@ function viewAccueil(){
     const c=sacContent(s);
     return '<a class="tuile" href="#/demande/'+s.id+'"><div class="icone">'+s.icone+'</div><strong>'+sacNom(s)+'</strong><span>'+esc(c.resume)+'</span></a>';
   }).join("");
-  return '<div class="hero"><div class="hero-fond" style="background-image:url(\'images/assomption-exterieur.jpg\')"></div>'
+  return '<div class="hero"><div class="hero-fond" style="background-image:url(\'assomption-exterieur.jpg\')"></div>'
     +'<div class="hero-contenu"><h2>'+t("hero_titre")+'</h2><p>'+t("hero_texte")+'</p>'
     +'<div class="actions-ligne" style="margin:0"><a class="btn hero-btn" href="#/demande">'+t("btn_demande")+'</a><a class="btn hero-btn2" href="#/suivi">'+t("btn_suivi")+'</a></div></div></div>'
     +'<div class="carte"><div class="encart rouge" style="margin:0">'+t("urgence")+(p.telephone?(lang()==="en"?" at <strong>"+esc(p.telephone)+"</strong>":" au <strong>"+esc(p.telephone)+"</strong>"):"")+'</div></div>'
@@ -3148,7 +3148,7 @@ function viewLiturgie(){
   const sources=lang()==="en"
     ?"Usual sources of the unit: for the francophone community, the journal « Vie liturgique » (Novalis) and « Vivre et célébrer » (National Office of Liturgy, CCCB); for the anglophone community, publications of the CCCB English sector (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Each guide recalls them."
     :"Sources habituelles de l'unité : pour la communauté francophone, la revue « Vie liturgique » (Novalis) et « Vivre et célébrer » (Office national de liturgie de la CECC) ; pour la communauté anglophone, les publications du secteur anglais de la CECC (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Chaque guide les rappelle.";
-  return '<div class="bande-photo" style="background-image:url(\'images/assomption-interieur.jpg\')"></div>'
+  return '<div class="bande-photo" style="background-image:url(\'assomption-interieur.jpg\')"></div>'
     +carteMesses()
     +carteFeuillet
     +'<div class="carte"><h2>'+t("lit_titre")+'</h2>'
@@ -3302,17 +3302,17 @@ function blocAVenir(){
 
 /* ---------- Galerie photos ---------- */
 const GALERIE_BASE=[
-  {img:"images/assomption-exterieur.jpg",fr:"Église de l'Assomption — extérieur",en:"Church of the Assumption — exterior"},
-  {img:"images/assomption-interieur.jpg",fr:"Église de l'Assomption — intérieur",en:"Church of the Assumption — interior"},
-  {img:"images/assomption-aerienne.jpg",fr:"Église de l'Assomption — vue aérienne (photo : diocèse d'Edmundston)",en:"Church of the Assumption — aerial view (photo: Diocese of Edmundston)"},
-  {img:"images/assomption-panorama.jpg",fr:"Église de l'Assomption — le sanctuaire, en français et en anglais (photo : diocèse d'Edmundston)",en:"Church of the Assumption — the sanctuary, in French and English (photo: Diocese of Edmundston)"},
-  {img:"images/saint-georges.jpg",fr:"Église Saint-Georges",en:"Saint-Georges church"},
-  {img:"images/saint-georges-cote.jpg",fr:"Église Saint-Georges — vue latérale (photo : diocèse d'Edmundston)",en:"Saint-Georges church — side view (photo: Diocese of Edmundston)"},
-  {img:"images/saint-andre.jpg",fr:"Église Saint-André",en:"Saint-André church"},
-  {img:"images/saint-andre-interieur.jpg",fr:"Église Saint-André — la nef (photo : diocèse d'Edmundston)",en:"Saint-André church — the nave (photo: Diocese of Edmundston)"},
-  {img:"images/saint-andre-rosace.jpg",fr:"Église Saint-André — la rosace (photo : diocèse d'Edmundston)",en:"Saint-André church — the rose window (photo: Diocese of Edmundston)"},
-  {img:"images/saint-michel.jpg",fr:"Église Saint-Michel",en:"Saint-Michel church"},
-  {img:"images/saint-michel-aerienne.jpg",fr:"Église Saint-Michel — vue aérienne (photo : diocèse d'Edmundston)",en:"Saint-Michel church — aerial view (photo: Diocese of Edmundston)"}
+  {img:"assomption-exterieur.jpg",fr:"Église de l'Assomption — extérieur",en:"Church of the Assumption — exterior"},
+  {img:"assomption-interieur.jpg",fr:"Église de l'Assomption — intérieur",en:"Church of the Assumption — interior"},
+  {img:"assomption-aerienne.jpg",fr:"Église de l'Assomption — vue aérienne (photo : diocèse d'Edmundston)",en:"Church of the Assumption — aerial view (photo: Diocese of Edmundston)"},
+  {img:"assomption-panorama.jpg",fr:"Église de l'Assomption — le sanctuaire, en français et en anglais (photo : diocèse d'Edmundston)",en:"Church of the Assumption — the sanctuary, in French and English (photo: Diocese of Edmundston)"},
+  {img:"saint-georges.jpg",fr:"Église Saint-Georges",en:"Saint-Georges church"},
+  {img:"saint-georges-cote.jpg",fr:"Église Saint-Georges — vue latérale (photo : diocèse d'Edmundston)",en:"Saint-Georges church — side view (photo: Diocese of Edmundston)"},
+  {img:"saint-andre.jpg",fr:"Église Saint-André",en:"Saint-André church"},
+  {img:"saint-andre-interieur.jpg",fr:"Église Saint-André — la nef (photo : diocèse d'Edmundston)",en:"Saint-André church — the nave (photo: Diocese of Edmundston)"},
+  {img:"saint-andre-rosace.jpg",fr:"Église Saint-André — la rosace (photo : diocèse d'Edmundston)",en:"Saint-André church — the rose window (photo: Diocese of Edmundston)"},
+  {img:"saint-michel.jpg",fr:"Église Saint-Michel",en:"Saint-Michel church"},
+  {img:"saint-michel-aerienne.jpg",fr:"Église Saint-Michel — vue aérienne (photo : diocèse d'Edmundston)",en:"Saint-Michel church — aerial view (photo: Diocese of Edmundston)"}
 ];
 function photosGalerie(){
   const extra=(params().galerie||"").split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{
@@ -3498,7 +3498,7 @@ function viewAccueil(){
     const c=sacContent(s);
     return '<a class="tuile" href="#/demande/'+s.id+'"><div class="icone">'+s.icone+'</div><strong>'+sacNom(s)+'</strong><span>'+esc(c.resume)+'</span></a>';
   }).join("");
-  return '<div class="hero"><div class="hero-fond" style="background-image:url(\'images/assomption-exterieur.jpg\')"></div>'
+  return '<div class="hero"><div class="hero-fond" style="background-image:url(\'assomption-exterieur.jpg\')"></div>'
     +'<div class="hero-contenu"><h2>'+t("hero_titre")+'</h2><p>'+t("hero_texte")+'</p>'
     +'<div class="actions-ligne" style="margin:0"><a class="btn hero-btn" href="#/demande">'+t("btn_demande")+'</a><a class="btn hero-btn2" href="#/suivi">'+t("btn_suivi")+'</a></div></div></div>'
     +'<div class="carte"><div class="encart rouge" style="margin:0">'+t("urgence")+(p.telephone?(lang()==="en"?" at <strong>"+esc(p.telephone)+"</strong>":" au <strong>"+esc(p.telephone)+"</strong>"):"")+'</div></div>'
@@ -3533,7 +3533,7 @@ function viewLiturgie(){
   const sources=lang()==="en"
     ?"Usual sources of the unit: for the francophone community, the journal « Vie liturgique » (Novalis) and « Vivre et célébrer » (National Office of Liturgy, CCCB); for the anglophone community, publications of the CCCB English sector (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Each guide recalls them."
     :"Sources habituelles de l'unité : pour la communauté francophone, la revue « Vie liturgique » (Novalis) et « Vivre et célébrer » (Office national de liturgie de la CECC) ; pour la communauté anglophone, les publications du secteur anglais de la CECC (Liturgical Calendar with Guidelines for Pastoral Liturgy, National Bulletin on Liturgy, CCCB Publications). Chaque guide les rappelle.";
-  return '<div class="bande-photo" style="background-image:url(\'images/assomption-interieur.jpg\')"></div>'
+  return '<div class="bande-photo" style="background-image:url(\'assomption-interieur.jpg\')"></div>'
     +carteMesses()
     +'<div class="deux-col">'+carteFeuillet+carteIntention+'</div>'
     +'<div class="carte"><h2>'+t("lit_titre")+'</h2>'
