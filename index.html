@@ -83,6 +83,7 @@
   .carte-compte input{margin-bottom:6px}
   @media print{header,nav,footer,.btn,.filtres,.retour,.actions-ligne{display:none!important} .carte{border:none;padding:0}}
 </style>
+<base target="_blank">
 </head>
 <body>
 <header>
@@ -99,6 +100,7 @@
       <a href="#/liturgie" data-nav="liturgie">Vie liturgique</a>
       <a href="#/evenements" data-nav="evenements">Événements</a>
       <a href="#/galerie" data-nav="galerie">Galerie</a>
+      <a href="#/histoire" data-nav="histoire">Histoire</a>
       <a href="#/benevoles" data-nav="benevoles">Bénévoles</a>
       <a href="#/paroisse" data-nav="paroisse">Espace paroisse</a>
       <a href="#/rapports" data-nav="rapports">Rapports</a>
@@ -3000,6 +3002,19 @@ route();
 .galerie-item{margin:0}
 .galerie-item img{width:100%;height:150px;object-fit:cover;border-radius:10px;display:block;border:1px solid #e4def0}
 .galerie-item figcaption{font-size:.8rem;color:#6b6577;padding:5px 2px 0;line-height:1.35}
+.histoire-intro{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch}
+.histoire-visuel{border-radius:12px;min-height:220px;background-size:cover;background-position:center;border:1px solid #e4def0}
+.histoire-grille{display:grid;grid-template-columns:1fr;gap:18px}
+.histoire-carte{display:grid;grid-template-columns:minmax(280px,1.1fr) minmax(240px,.9fr);gap:0;border:1px solid #e4def0;border-radius:14px;overflow:hidden;background:#fff}
+.histoire-carte video{width:100%;height:100%;min-height:240px;display:block;background:#17131f;object-fit:cover}
+.histoire-corps{padding:18px 20px;display:flex;flex-direction:column;justify-content:center}
+.histoire-corps h3{margin:0 0 7px}
+.histoire-corps p{font-size:.92rem;margin-bottom:8px}
+.histoire-meta{font-size:.8rem;color:#6b6577;margin-bottom:12px}
+.histoire-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.histoire-actions .btn{margin-top:0;padding:8px 15px;font-size:.86rem}
+.histoire-note{font-size:.84rem;color:#6b6577;margin-top:12px}
+@media(max-width:760px){.histoire-intro,.histoire-carte{grid-template-columns:1fr}.histoire-carte video{min-height:210px}}
 </style>
 <script>
 /* ============================================================
@@ -3505,6 +3520,7 @@ function viewAccueil(){
     +blocAnnonces()
     +blocAVenir()
     +'<div class="carte"><h2>'+t("eglises_titre")+'</h2><div class="eglises-grille">'+cartesEglises()+'</div></div>'
+    +'<div class="carte"><h2>🎬 '+t("hist_titre")+'</h2><p>'+t("hist_resume")+'</p><div class="actions-ligne" style="margin:0"><a class="btn petit" href="#/histoire">'+t("hist_btn")+'</a></div></div>'
     +'<div class="carte"><h2>'+t("sacrements_titre")+'</h2><div class="grille">'+tuiles+'</div></div>';
 }
 
@@ -3647,6 +3663,110 @@ function majEntete(){
   });
   const bl=document.getElementById("btn-lang");
   if(bl) bl.textContent=en?"Français":"English";
+}
+
+route();
+</script>
+<script>
+/* ============================================================
+   HISTOIRE DE NOS PAROISSES — films et présentations
+   Les fichiers MP4 et ZIP doivent être placés à la racine du
+   dépôt GitHub, au même niveau que index.html.
+   ============================================================ */
+Object.assign(TR.fr,{
+  nav_histoire:"Histoire",
+  hist_titre:"Histoire de nos paroisses",
+  hist_resume:"Quatre récits visuels pour découvrir les racines, les étapes fondatrices et la vie de nos paroisses.",
+  hist_btn:"Découvrir notre histoire",
+  hist_kicker:"Notre mémoire vivante",
+  hist_intro:"Chaque film présente, en quatre à cinq minutes, l'évolution d'une paroisse : ses fondateurs, son église, ses événements marquants et sa mission aujourd'hui. Les présentations modifiables accompagnent les films pour une célébration, une rencontre de catéchèse ou une activité paroissiale.",
+  hist_duree:"Durée",
+  hist_regarder:"Ouvrir le film",
+  hist_presentation:"Télécharger la présentation",
+  hist_credit:"Sources : pages historiques du diocèse d'Edmundston et collection de photos de l'unité pastorale.",
+  hist_zip:"Le fichier ZIP contient la présentation modifiable et ses images. Il peut être ouvert dans l'éditeur de présentation, puis exporté en PowerPoint.",
+  hist_video_indisponible:"Votre navigateur ne peut pas lire cette vidéo. Utilisez le lien « Ouvrir le film »."
+});
+Object.assign(TR.en,{
+  nav_histoire:"History",
+  hist_titre:"History of our parishes",
+  hist_resume:"Four visual stories to discover the roots, founding milestones and life of our parishes.",
+  hist_btn:"Discover our history",
+  hist_kicker:"Our living memory",
+  hist_intro:"Each four-to-five-minute film presents the journey of one parish: its founders, its church, its landmark events and its mission today. The editable presentations accompany the films for a celebration, a catechesis gathering or a parish activity.",
+  hist_duree:"Running time",
+  hist_regarder:"Open the film",
+  hist_presentation:"Download the presentation",
+  hist_credit:"Sources: historical pages of the Diocese of Edmundston and the pastoral unit photo collection.",
+  hist_zip:"The ZIP file contains the editable presentation and its images. It can be opened in the presentation editor, then exported to PowerPoint.",
+  hist_video_indisponible:"Your browser cannot play this video. Use the “Open the film” link."
+});
+
+const HISTOIRE_PAROISSES=[
+  {nom:"Assomption",lieu:"Grand-Sault / Grand Falls",duree:"4 min 13 s",img:"assomption-exterieur.jpg",
+   video:"Assomption_histoire.mp4",presentation:"Presentation_Assomption.zip",
+   fr:"De la mission de 1854 à l'église de pierre ouverte en 1909, une paroisse mère marquée par la persévérance, la foi et le service.",
+   en:"From the 1854 mission to the stone church opened in 1909, a mother parish marked by perseverance, faith and service."},
+  {nom:"Saint-Georges",lieu:"Grand-Sault / Grand Falls",duree:"4 min 34 s",img:"saint-georges.jpg",
+   video:"Saint-Georges_histoire.mp4",presentation:"Presentation_Saint-Georges.zip",
+   fr:"Fondée en 1950 pour répondre à la croissance de la ville, la paroisse bénit son église en 1953 et devient un lieu vivant de prière et de communion.",
+   en:"Founded in 1950 in response to the town's growth, the parish blessed its church in 1953 and became a living place of prayer and communion."},
+  {nom:"Saint-André",lieu:"Saint-André",duree:"4 min 34 s",img:"saint-andre.jpg",
+   video:"Saint-Andre_histoire.mp4",presentation:"Presentation_Saint-Andre.zip",
+   fr:"Au cœur des vallons et des terres agricoles, la paroisse fondée en 1904 garde une identité francophone, musicale et communautaire.",
+   en:"In the heart of valleys and farmland, the parish founded in 1904 keeps a francophone, musical and community-minded identity."},
+  {nom:"Saint-Michel",lieu:"Drummond",duree:"4 min 34 s",img:"saint-michel.jpg",
+   video:"Saint-Michel_histoire.mp4",presentation:"Presentation_Saint-Michel.zip",
+   fr:"Érigée en 1890 sur un territoire de belles terres agricoles, la paroisse construit son église actuelle de 1906 à 1908.",
+   en:"Erected in 1890 in a region of rich farmland, the parish built its present church from 1906 to 1908."}
+];
+
+function carteHistoire(x){
+  const resume=lang()==="en"?x.en:x.fr;
+  const media='<video controls playsinline preload="metadata" poster="'+esc(x.img)+'" aria-label="'+esc(x.nom)+'">'
+    +'<source src="'+encodeURI(x.video)+'" type="video/mp4">'+t("hist_video_indisponible")+'</video>';
+  return '<article class="histoire-carte">'+media+'<div class="histoire-corps">'
+    +'<h3>'+esc(x.nom)+'</h3><p>'+esc(resume)+'</p>'
+    +'<div class="histoire-meta">📍 '+esc(x.lieu)+' · 🎬 '+t("hist_duree")+' : '+esc(x.duree)+'</div>'
+    +'<div class="histoire-actions"><a class="btn petit" href="'+encodeURI(x.video)+'" target="_blank" rel="noopener">'+t("hist_regarder")+'</a>'
+    +'<a class="btn petit secondaire" href="'+encodeURI(x.presentation)+'" download>'+t("hist_presentation")+'</a></div>'
+    +'</div></article>';
+}
+function viewHistoire(){
+  const heroStyle=lang()==="en"?"background-image:url('assomption-panorama.jpg')":"background-image:url('assomption-panorama.jpg')";
+  return '<a class="retour" href="#/">&larr; '+t("retour_accueil").replace(/^← /,"")+'</a>'
+    +'<div class="carte histoire-intro"><div><div class="discret" style="text-transform:uppercase;letter-spacing:1px;font-weight:700">'+t("hist_kicker")+'</div>'
+    +'<h2 style="font-size:1.65rem;margin-top:4px">'+t("hist_titre")+'</h2><p>'+t("hist_intro")+'</p>'
+    +'<p class="histoire-note">'+t("hist_credit")+'</p></div><div class="histoire-visuel" style="'+heroStyle+'" role="img" aria-label="'+esc(t("hist_titre"))+'"></div></div>'
+    +'<div class="histoire-grille">'+HISTOIRE_PAROISSES.map(carteHistoire).join("")+'</div>'
+    +'<div class="encart bleu">'+t("hist_zip")+'</div>';
+}
+
+/* Routeur final : ajout de la route #/histoire */
+function route(){
+  const h=location.hash||"#/"; const app=document.getElementById("app");
+  let nav="accueil", html="";
+  if(h==="#/"||h==="#") html=viewAccueil();
+  else if(h==="#/demande"){html=viewDemandeListe();nav="demande";}
+  else if(h.indexOf("#/demande/")===0){html=viewDemandeForm(h.slice(10));nav="demande";}
+  else if(h.indexOf("#/confirmation/")===0){html=viewConfirmation(decodeURIComponent(h.slice(15)));nav="suivi";}
+  else if(h==="#/suivi"){html=viewSuivi();nav="suivi";}
+  else if(h==="#/paroisse"){html=viewParoisse();nav="paroisse";}
+  else if(h.indexOf("#/paroisse/")===0){html=viewDetail(decodeURIComponent(h.slice(11)));nav="paroisse";}
+  else if(h==="#/liturgie"){html=viewLiturgie();nav="liturgie";}
+  else if(h.indexOf("#/liturgie/")===0){html=viewLiturgieGuide(h.slice(11));nav="liturgie";}
+  else if(h==="#/feuillet"){html=viewFeuillet();nav="liturgie";}
+  else if(h==="#/intention"){html=viewIntention();nav="liturgie";}
+  else if(h==="#/evenements"){html=viewEvenements();nav="evenements";}
+  else if(h==="#/galerie"){html=viewGalerie();nav="galerie";}
+  else if(h==="#/histoire"){html=viewHistoire();nav="histoire";}
+  else if(h==="#/benevoles"){html=viewBenevoles();nav="benevoles";}
+  else if(h==="#/rapports"){html=viewRapports();nav="rapports";}
+  else if(h==="#/parametres"){html=viewParametres();nav="parametres";}
+  else html=viewAccueil();
+  app.innerHTML=html; window.scrollTo(0,0);
+  document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("actif",a.getAttribute("data-nav")===nav));
+  majEntete();
 }
 
 route();
