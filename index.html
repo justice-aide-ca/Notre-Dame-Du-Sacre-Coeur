@@ -1880,7 +1880,7 @@ function progressionHTML(statut){
 
 /* ---------- Horaire des messes ---------- */
 const MESSES_DEFAUT=[
- {jour:2,heure:"19:00",paroisse:"Saint-Georges",note:"Précédée du chapelet et de l'adoration dès 18h"},
+ {jour:2,heure:"19:00",paroisse:"Saint-Georges",note:"Précédée du chapelet et de l'adoration dès 18h / Preceded by the rosary and adoration from 6 p.m."},
  {jour:3,heure:"19:00",paroisse:"Saint-Michel",note:""},
  {jour:4,heure:"09:00",paroisse:"Saint-André",note:""},
  {jour:5,heure:"09:00",paroisse:"Assomption",note:"Messe en anglais / Mass in English"}
@@ -3618,7 +3618,7 @@ function route(){
 /* ---------- Préremplissage v5 : événements et intention de démonstration ---------- */
 if(!localStorage.getItem("pa_seed_v5")){
   if(!localStorage.getItem("pa_evenements")) sauverEvenements([
-    {id:"ev-demo1",date:"2026-09-14",heure:"",titre:"Rentrée de la catéchèse — inscriptions",lieu:"Après les messes / After Masses",desc:""},
+    {id:"ev-demo1",date:"2026-09-14",heure:"",titre:"Rentrée de la catéchèse / Catechism registration",lieu:"Après les messes / After Masses",desc:""},
     {id:"ev-demo2",date:"2026-09-21",heure:"17:00",titre:"Souper-bénéfice / Benefit supper",lieu:"Salle paroissiale Saint-Georges",desc:"Billets au secrétariat / Tickets at the parish office"}
   ]);
   if(!localStorage.getItem("pa_intentions")) sauverIntentions([
@@ -3627,6 +3627,20 @@ if(!localStorage.getItem("pa_seed_v5")){
      statut:"planifiee",messePrevue:"Dimanche 14 septembre, 10h30 — Assomption",note:""}
   ]);
   localStorage.setItem("pa_seed_v5","1");
+}
+
+/* ---------- Entête et pied de page bilingues ---------- */
+function majEntete(){
+  const p=params();
+  const en=lang()==="en";
+  document.title=p.paroisse;
+  document.getElementById("tete-titre").textContent=p.paroisse;
+  document.getElementById("tete-sous-titre").textContent=p.diocese+(en
+    ?" — Request, preparation and celebration of the sacraments"
+    :" — Demande, préparation et célébration des sacrements");
+  document.getElementById("pied").innerHTML=esc(p.paroisse)+" · "+esc(p.diocese)
+    +(p.telephone?" · "+(en?"Phone":"Tél.")+" : "+esc(p.telephone):"")+(p.email?" · "+esc(p.email):"")
+    +(en?"<br>Prototype — data is kept locally in this browser.":"<br>Prototype — données conservées localement dans ce navigateur.");
 }
 
 route();
