@@ -3641,6 +3641,12 @@ function majEntete(){
   document.getElementById("pied").innerHTML=esc(p.paroisse)+" · "+esc(p.diocese)
     +(p.telephone?" · "+(en?"Phone":"Tél.")+" : "+esc(p.telephone):"")+(p.email?" · "+esc(p.email):"")
     +(en?"<br>Prototype — data is kept locally in this browser.":"<br>Prototype — données conservées localement dans ce navigateur.");
+  document.querySelectorAll("#nav a").forEach(a=>{
+    const k=a.getAttribute("data-nav");
+    a.textContent=t("nav_"+k);
+  });
+  const bl=document.getElementById("btn-lang");
+  if(bl) bl.textContent=en?"Français":"English";
 }
 
 route();
