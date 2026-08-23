@@ -1,37 +1,52 @@
-# Unité pastorale Notre-Dame-du-Sacré-Cœur
+# Site de l'Unité Pastorale Notre-Dame-du-Sacré-Cœur
 
-Plateforme de services pastoraux de l'unité pastorale Notre-Dame-du-Sacré-Cœur
-(Assomption, Saint-Georges, Saint-André, Saint-Michel) — Diocèse d'Edmundston,
-Nouveau-Brunswick, Canada.
+## Déploiement sur GitHub Pages
 
-## Contenu
+1. Créez un nouveau repository sur GitHub (ex: `notre-dame-sacre-coeur`)
+2. Téléversez tous les fichiers de ce dossier à la racine du repository
+3. Allez dans **Settings > Pages**
+4. Sélectionnez la branche `main` et le dossier `/ (root)`
+5. Votre site sera accessible à `https://votre-org.github.io/notre-dame-sacre-coeur/`
 
-Un seul fichier à déployer : **`index.html`** (aucune installation requise —
-HTML, CSS et JavaScript autonomes).
+## Structure du site
 
-- **Demandes de sacrements** (bilingue FR/EN) : les 7 sacrements + funérailles,
-  de la demande jusqu'à la célébration, selon le Code de droit canonique (CIC 1983)
-  et les directives diocésaines configurables.
-- **Suivi des demandes** par numéro de référence ; espace paroisse pour l'équipe
-  pastorale (instruction, préparation, célébration, liste de contrôle canonique).
-- **Horaire des messes** : temps ordinaire modifiable, temps forts en texte libre.
-- **Vie liturgique** : guides des célébrations spéciales (Avent, Carême, Noël,
-  Triduum), calendrier liturgique calculé automatiquement, suggestions de prière
-  et de visuel — sources « Vie liturgique » (Novalis) et CECC/CCCB.
-- **Bénévoles** : 17 ministères, conditions, formulaire, répertoire des contacts.
-- **Rapports** : pastoraux et financiers, mensuels et annuels (plan comptable
-  réel des paroisses, bilan, rapport annuel AGA imprimable).
-- **Données initiales** : reprise des registres paroissiaux pour la comparaison
-  d'année en année.
+```
+├── index.html              # Page d'accueil
+├── horaires.html           # Horaires des messes
+├── bulletin.html           # Bulletin paroissial
+├── transparence.html       # Rapports financiers et pastoraux
+├── partenaires.html        # Page des commanditaires
+├── css/
+│   └── style.css           # Styles complets
+├── js/
+│   └── main.js             # Scripts (menu mobile)
+├── paroisses/
+│   ├── assomption.html     # Page paroisse Assomption
+│   ├── saint-georges.html  # Page paroisse Saint-Georges
+│   ├── saint-andre.html    # Page paroisse Saint-André
+│   └── saint-michel.html   # Page paroisse Saint-Michel
+└── documents/              # Dossier pour les PDF (rapports, bulletins)
+```
 
-## Important — données
+## Personnalisation
 
-Ce prototype fonctionne entièrement dans le navigateur : les données saisies sont
-conservées **localement** (localStorage), rien n'est envoyé sur un serveur.
-Pour la production (base de données sécurisée, authentification de l'espace
-paroisse), voir le document d'audit et de recommandations.
+Remplacez les éléments marqués `[À compléter]` par vos informations réelles :
+- Numéros de téléphone
+- Adresses postales
+- Adresses courriel
+- Coordonnées du secrétariat
 
-## Déploiement
+## Ajouter un partenaire
 
-Site statique : hébergeable tel quel sur GitHub Pages, Render, Netlify ou tout
-hébergement web. `index.html` est le point d'entrée.
+1. Remplacez les placeholders dans `partenaires.html`
+2. Ajoutez le logo dans le dossier `images/` (à créer)
+3. Mettez à jour le bandeau dans le footer de toutes les pages
+
+## Ajouter un rapport
+
+1. Placez le PDF dans le dossier `documents/`
+2. Ajoutez une entrée dans `transparence.html`
+
+## Mises à jour du bulletin
+
+Modifiez directement `bulletin.html` chaque semaine, ou créez des pages archivées.
