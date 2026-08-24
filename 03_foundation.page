@@ -12,7 +12,7 @@ elements:
   - 92
   content:
     style: $year
-    text: '1950'
+    text: '1890'
     wrap: false
     color: '#7A2E2E'
     fontSize: 78
@@ -42,7 +42,7 @@ elements:
   - 78
   content:
     style: $title
-    text: Le décret de Mgr Gagnon
+    text: La paroisse est érigée
     wrap: true
     fontSize: 38
     bold: true
@@ -56,8 +56,8 @@ elements:
   - 130
   content:
     style: $body
-    text: Le 22 juillet 1950, Mgr Joseph-Roméo Gagnon érige canoniquement Saint-Georges. Le Père Cyr Dubé, originaire de Saint-André
-      et docteur en droit canon, devient le curé fondateur.
+    text: Le 29 septembre 1890, Mgr James Rogers érige canoniquement Saint-Michel de Drummond. Le Père Georges B. Gauvin devient
+      le premier curé et achète les terrains de la future église.
     wrap: true
     color: '#2B2118'
     fontSize: 18
@@ -69,7 +69,7 @@ elements:
   - 332
   - 856
   - 142
-  src: media/saint-georges-cote-sepia.jpg
+  src: media/saint-michel-sepia.jpg
   fit:
     mode: cover
 - elementId: wide-shade
@@ -108,8 +108,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
-      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : contributions et François Foulem'
     wrap: false
     color: '#6F6256'
     fontSize: 8

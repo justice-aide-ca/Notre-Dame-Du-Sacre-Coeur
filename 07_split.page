@@ -10,7 +10,7 @@ elements:
   - 0
   - 416
   - 540
-  src: media/saint-georges-cote.jpg
+  src: media/assomption-interieur-sepia.jpg
   fit:
     mode: cover
 - elementId: image-shade
@@ -44,7 +44,7 @@ elements:
   - 62
   content:
     style: $year
-    text: '1953'
+    text: '1924'
     wrap: false
     color: '#7A2E2E'
     fontSize: 54
@@ -74,7 +74,7 @@ elements:
   - 74
   content:
     style: $title
-    text: La bénédiction de l’église
+    text: Éduquer, transmettre, servir
     wrap: true
     fontSize: 31
     bold: true
@@ -88,7 +88,8 @@ elements:
   - 164
   content:
     style: $body
-    text: Le 31 août 1953, tous les paroissiens sont invités à la bénédiction. Saint-Georges possède désormais sa Maison-Dieu.
+    text: Le Couvent du Sacré-Cœur est entrepris en 1923. Le 28 août 1924, quatre religieuses de Notre-Dame-du-Sacré-Cœur
+      arrivent; l’institution est achevée en janvier 1925.
     wrap: true
     color: '#2B2118'
     fontSize: 17
@@ -100,7 +101,7 @@ elements:
   - 428
   - 38
   - 38
-  iconName: fas:church
+  iconName: fas:book-open
   fill:
     type: solid
     color: '#B08A3C'
@@ -129,8 +130,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
-      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_grand-sault_assomption.html">Diocèse d’Edmundston</a> — page
+      historique, consultée le 7 août 2026 · Photos : contributions, Francis Denis et François Foulem'
     wrap: false
     color: '#6F6256'
     fontSize: 8

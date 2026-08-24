@@ -6,17 +6,17 @@ elements:
 - elementId: main-image
   elementType: image
   bounds:
-  - 0
+  - 544
   - 0
   - 416
   - 540
-  src: media/saint-michel-aerienne.jpg
+  src: media/saint-georges-cote.jpg
   fit:
     mode: cover
 - elementId: image-shade
   elementType: shape
   bounds:
-  - 0
+  - 544
   - 0
   - 416
   - 540
@@ -27,7 +27,7 @@ elements:
 - elementId: accent-edge
   elementType: shape
   bounds:
-  - 416
+  - 524
   - 0
   - 20
   - 540
@@ -38,13 +38,13 @@ elements:
 - elementId: year
   elementType: text
   bounds:
-  - 476
+  - 52
   - 54
   - 432
   - 62
   content:
     style: $year
-    text: '1947'
+    text: '1961'
     wrap: false
     color: '#7A2E2E'
     fontSize: 54
@@ -52,7 +52,7 @@ elements:
 - elementId: title-rule
   elementType: line
   bounds:
-  - 476
+  - 52
   - 124
   - 108
   - 1
@@ -68,13 +68,13 @@ elements:
 - elementId: title
   elementType: text
   bounds:
-  - 476
+  - 52
   - 146
   - 432
   - 74
   content:
     style: $title
-    text: La Grande Mission
+    text: La statue de saint Georges
     wrap: true
     fontSize: 31
     bold: true
@@ -82,14 +82,14 @@ elements:
 - elementId: body
   elementType: text
   bounds:
-  - 476
+  - 52
   - 238
   - 432
   - 164
   content:
     style: $body
-    text: Pendant trois semaines, une grande mission marque la communauté. Douze croix sont installées le long des routes,
-      sur une distance de trente-cinq milles.
+    text: Le 1er janvier 1961, une statue de saint Georges en marbre, taillée en Italie et payée par les paroissiens, est
+      installée devant l’église.
     wrap: true
     color: '#2B2118'
     fontSize: 17
@@ -97,11 +97,11 @@ elements:
 - elementId: icon
   elementType: icon
   bounds:
-  - 476
+  - 52
   - 428
   - 38
   - 38
-  iconName: fas:road
+  iconName: fas:landmark
   fill:
     type: solid
     color: '#B08A3C'
@@ -130,8 +130,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
-      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
+      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
     wrap: false
     color: '#6F6256'
     fontSize: 8
@@ -147,7 +147,7 @@ elements:
   - 14
   content:
     style: $footer
-    text: '10'
+    text: 09
     wrap: false
     color: '#6F6256'
     fontSize: 9

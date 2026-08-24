@@ -10,7 +10,7 @@ elements:
   - 0
   - 416
   - 540
-  src: media/saint-michel-aerienne.jpg
+  src: media/assomption-aerienne-sepia.jpg
   fit:
     mode: cover
 - elementId: image-shade
@@ -44,7 +44,7 @@ elements:
   - 62
   content:
     style: $year
-    text: '1947'
+    text: '1885'
     wrap: false
     color: '#7A2E2E'
     fontSize: 54
@@ -74,7 +74,7 @@ elements:
   - 74
   content:
     style: $title
-    text: La Grande Mission
+    text: Une première église s’ouvre
     wrap: true
     fontSize: 31
     bold: true
@@ -88,8 +88,8 @@ elements:
   - 164
   content:
     style: $body
-    text: Pendant trois semaines, une grande mission marque la communauté. Douze croix sont installées le long des routes,
-      sur une distance de trente-cinq milles.
+    text: Le Père O’Leary organise la paroisse et fait construire l’église et le presbytère. La pierre angulaire est bénie
+      le 15 août 1882; l’église ouvre au culte en 1885.
     wrap: true
     color: '#2B2118'
     fontSize: 17
@@ -101,7 +101,7 @@ elements:
   - 428
   - 38
   - 38
-  iconName: fas:road
+  iconName: fas:church
   fill:
     type: solid
     color: '#B08A3C'
@@ -130,8 +130,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
-      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_grand-sault_assomption.html">Diocèse d’Edmundston</a> — page
+      historique, consultée le 7 août 2026 · Photos : contributions, Francis Denis et François Foulem'
     wrap: false
     color: '#6F6256'
     fontSize: 8
@@ -147,7 +147,7 @@ elements:
   - 14
   content:
     style: $footer
-    text: '10'
+    text: '04'
     wrap: false
     color: '#6F6256'
     fontSize: 9

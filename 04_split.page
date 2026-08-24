@@ -10,7 +10,7 @@ elements:
   - 0
   - 416
   - 540
-  src: media/saint-georges-sepia.jpg
+  src: media/saint-michel-aerienne-sepia.jpg
   fit:
     mode: cover
 - elementId: image-shade
@@ -44,7 +44,7 @@ elements:
   - 62
   content:
     style: $year
-    text: '1950'
+    text: '1860'
     wrap: false
     color: '#7A2E2E'
     fontSize: 54
@@ -74,7 +74,7 @@ elements:
   - 74
   content:
     style: $title
-    text: La première messe paroissiale
+    text: Des colons irlandais, puis français
     wrap: true
     fontSize: 31
     bold: true
@@ -88,8 +88,8 @@ elements:
   - 164
   content:
     style: $body
-    text: La première messe a lieu dans une chapelle provisoire le 30 juillet 1950. À la fin de l’année, la paroisse compte
-      1 307 personnes et 285 familles.
+    text: Des colons irlandais ouvrent la colonisation vers les années 1860. Vers 1880, des familles venues du Québec — surtout
+      du Témiscouata — s’établissent et développent l’agriculture.
     wrap: true
     color: '#2B2118'
     fontSize: 17
@@ -101,7 +101,7 @@ elements:
   - 428
   - 38
   - 38
-  iconName: fas:cross
+  iconName: fas:seedling
   fill:
     type: solid
     color: '#B08A3C'
@@ -130,8 +130,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
-      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : contributions et François Foulem'
     wrap: false
     color: '#6F6256'
     fontSize: 8

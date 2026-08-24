@@ -1,60 +1,51 @@
 pageType: content
 background:
-  type: solid
-  color: '#F5F0E6'
+  type: image
+  src: media/saint-andre-interieur.jpg
+  fit:
+    mode: cover
 elements:
-- elementId: main-image
+- elementId: hero
   elementType: image
   bounds:
   - 0
   - 0
-  - 416
+  - 960
   - 540
-  src: media/saint-michel-aerienne.jpg
+  src: media/saint-andre-interieur.jpg
   fit:
     mode: cover
-- elementId: image-shade
+- elementId: shade
   elementType: shape
   bounds:
   - 0
   - 0
-  - 416
+  - 960
   - 540
   shapeName: rect
   fill:
     type: solid
-    color: '#17110D22'
-- elementId: accent-edge
-  elementType: shape
-  bounds:
-  - 416
-  - 0
-  - 20
-  - 540
-  shapeName: rect
-  fill:
-    type: solid
-    color: '#7A2E2E'
+    color: '#17110DA8'
 - elementId: year
   elementType: text
   bounds:
-  - 476
-  - 54
-  - 432
-  - 62
+  - 52
+  - 52
+  - 260
+  - 36
   content:
-    style: $year
-    text: '1947'
+    style: $label
+    text: Aujourd’hui
     wrap: false
-    color: '#7A2E2E'
-    fontSize: 54
+    color: '#B08A3C'
+    fontSize: 18
     bold: true
-- elementId: title-rule
+- elementId: today-rule
   elementType: line
   bounds:
-  - 476
-  - 124
+  - 52
   - 108
+  - 132
   - 1
   viewBox:
   - 1
@@ -68,43 +59,33 @@ elements:
 - elementId: title
   elementType: text
   bounds:
-  - 476
-  - 146
-  - 432
-  - 74
+  - 52
+  - 136
+  - 610
+  - 88
   content:
     style: $title
-    text: La Grande Mission
+    text: Des racines qui portent du fruit
     wrap: true
-    fontSize: 31
+    color: '#F5F0E6'
+    fontSize: 42
     bold: true
-    lineHeight: 1.08
+    lineHeight: 1.05
 - elementId: body
   elementType: text
   bounds:
-  - 476
-  - 238
-  - 432
-  - 164
+  - 52
+  - 252
+  - 560
+  - 126
   content:
     style: $body
-    text: Pendant trois semaines, une grande mission marque la communauté. Douze croix sont installées le long des routes,
-      sur une distance de trente-cinq milles.
+    text: Agricole, francophone, musicale et accueillante, Saint-André conserve la fierté de ses ancêtres tout en continuant
+      à faire grandir sa vie paroissiale.
     wrap: true
-    color: '#2B2118'
-    fontSize: 17
+    color: '#F5F0E6'
+    fontSize: 20
     lineHeight: 1.42
-- elementId: icon
-  elementType: icon
-  bounds:
-  - 476
-  - 428
-  - 38
-  - 38
-  iconName: fas:road
-  fill:
-    type: solid
-    color: '#B08A3C'
 - elementId: footer-line
   elementType: line
   bounds:
@@ -120,7 +101,7 @@ elements:
   border:
     style: solid
     width: 1
-    color: '#7A2E2E55'
+    color: '#F5F0E66B'
 - elementId: source
   elementType: text
   bounds:
@@ -130,10 +111,10 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
-      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_st-andre.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : Google, Archives R. H. S.-J. et contributions'
     wrap: false
-    color: '#6F6256'
+    color: '#F5F0E6CC'
     fontSize: 8
     align:
     - left
@@ -147,9 +128,9 @@ elements:
   - 14
   content:
     style: $footer
-    text: '10'
+    text: '12'
     wrap: false
-    color: '#6F6256'
+    color: '#F5F0E6CC'
     fontSize: 9
     bold: true
     align:

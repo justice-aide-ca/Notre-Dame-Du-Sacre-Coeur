@@ -1,7 +1,7 @@
 pageType: content
 background:
   type: image
-  src: media/saint-georges-cote-sepia.jpg
+  src: media/saint-michel-sepia.jpg
   fit:
     mode: cover
 elements:
@@ -12,7 +12,7 @@ elements:
   - 0
   - 960
   - 540
-  src: media/saint-georges-cote-sepia.jpg
+  src: media/saint-michel-sepia.jpg
   fit:
     mode: cover
 - elementId: dark-overlay
@@ -35,7 +35,7 @@ elements:
   - 54
   content:
     style: $label
-    text: '1951'
+    text: '1892'
     wrap: false
     color: '#B08A3C'
     fontSize: 20
@@ -65,7 +65,7 @@ elements:
   - 100
   content:
     style: $title
-    text: Construire une Maison-Dieu
+    text: Le premier lieu de culte
     wrap: true
     color: '#F5F0E6'
     fontSize: 46
@@ -94,8 +94,8 @@ elements:
   - 116
   content:
     style: $quote
-    text: 'Le contrat de construction est confié à Dollard Bélanger au coût de 770 000 $. Le curé écrit : « Nous avons confiance
-      que cette construction sera menée à bien. »'
+    text: Le 8 septembre 1892, Mgr Rogers bénit la première église, située sur une partie de l’actuel cimetière, et y confirme
+      une centaine de personnes.
     wrap: true
     color: '#F5F0E6'
     fontSize: 24
@@ -126,8 +126,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
-      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : contributions et François Foulem'
     wrap: false
     color: '#F5F0E6CC'
     fontSize: 8

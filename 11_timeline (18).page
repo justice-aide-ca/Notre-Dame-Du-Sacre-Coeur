@@ -26,7 +26,7 @@ elements:
   - 58
   content:
     style: $title
-    text: Une communauté centenaire
+    text: Du territoire à la communauté
     wrap: true
     fontSize: 34
     bold: true
@@ -71,7 +71,7 @@ elements:
   - 34
   content:
     style: $subtitle
-    text: '1890'
+    text: '1842'
     wrap: true
     color: '#7A2E2E'
     fontSize: 21
@@ -88,7 +88,7 @@ elements:
   - 48
   content:
     style: $footer
-    text: Érection canonique
+    text: Premiers arpentages
     wrap: true
     color: '#2B2118'
     fontSize: 11
@@ -120,7 +120,7 @@ elements:
   - 34
   content:
     style: $subtitle
-    text: '1892'
+    text: '1904'
     wrap: true
     color: '#7A2E2E'
     fontSize: 21
@@ -137,7 +137,7 @@ elements:
   - 58
   content:
     style: $footer
-    text: Première église bénie
+    text: Fondation paroissiale
     wrap: true
     color: '#2B2118'
     fontSize: 11
@@ -169,7 +169,7 @@ elements:
   - 34
   content:
     style: $subtitle
-    text: '1908'
+    text: '1939'
     wrap: true
     color: '#7A2E2E'
     fontSize: 21
@@ -186,7 +186,7 @@ elements:
   - 48
   content:
     style: $footer
-    text: Église actuelle achevée
+    text: Chapelle Saint-Éloi
     wrap: true
     color: '#2B2118'
     fontSize: 11
@@ -218,7 +218,7 @@ elements:
   - 34
   content:
     style: $subtitle
-    text: '1949'
+    text: '1967'
     wrap: true
     color: '#7A2E2E'
     fontSize: 21
@@ -235,7 +235,7 @@ elements:
   - 58
   content:
     style: $footer
-    text: Académie Notre-Dame
+    text: Incorporation du village
     wrap: true
     color: '#2B2118'
     fontSize: 11
@@ -267,7 +267,7 @@ elements:
   - 34
   content:
     style: $subtitle
-    text: '1967'
+    text: '1982'
     wrap: true
     color: '#7A2E2E'
     fontSize: 21
@@ -284,7 +284,7 @@ elements:
   - 48
   content:
     style: $footer
-    text: Incorporation du village
+    text: Armoiries du village
     wrap: true
     color: '#2B2118'
     fontSize: 11
@@ -316,7 +316,7 @@ elements:
   - 34
   content:
     style: $subtitle
-    text: '1990'
+    text: '1994'
     wrap: true
     color: '#7A2E2E'
     fontSize: 21
@@ -333,7 +333,7 @@ elements:
   - 58
   content:
     style: $footer
-    text: « 100 ans… ça se fête! »
+    text: 1 851 habitants recensés
     wrap: true
     color: '#2B2118'
     fontSize: 11
@@ -383,8 +383,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
-      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_st-andre.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : Google, Archives R. H. S.-J. et contributions'
     wrap: false
     color: '#6F6256'
     fontSize: 8

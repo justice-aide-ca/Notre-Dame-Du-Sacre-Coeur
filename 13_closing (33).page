@@ -1,7 +1,7 @@
 pageType: final
 background:
   type: image
-  src: media/saint-michel.jpg
+  src: media/saint-georges-cote.jpg
   fit:
     mode: cover
 elements:
@@ -12,7 +12,7 @@ elements:
   - 0
   - 960
   - 540
-  src: media/saint-michel.jpg
+  src: media/saint-georges-cote.jpg
   fit:
     mode: cover
 - elementId: shade
@@ -49,7 +49,7 @@ elements:
   - 116
   content:
     style: $title
-    text: Des terres fertiles, une foi transmise.
+    text: « Merci Seigneur! »
     wrap: true
     color: '#F5F0E6'
     fontSize: 44
@@ -80,8 +80,8 @@ elements:
   - 96
   content:
     style: $quote
-    text: Que saint Michel accompagne encore cette communauté qui a su faire grandir ensemble ses champs, ses écoles et son
-      Église.
+    text: En regardant leur histoire, les paroissiens de Saint-Georges reconnaissent une chrétienté en marche — et un avenir
+      confié à Dieu.
     wrap: true
     color: '#F5F0E6'
     fontSize: 22
@@ -125,8 +125,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
-      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
+      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
     wrap: false
     color: '#F5F0E6CC'
     fontSize: 8

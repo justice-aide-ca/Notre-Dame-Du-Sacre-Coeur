@@ -10,7 +10,7 @@ elements:
   - 0
   - 416
   - 540
-  src: media/saint-michel-aerienne.jpg
+  src: media/saint-michel-sepia.jpg
   fit:
     mode: cover
 - elementId: image-shade
@@ -44,7 +44,7 @@ elements:
   - 62
   content:
     style: $year
-    text: '1947'
+    text: '1923'
     wrap: false
     color: '#7A2E2E'
     fontSize: 54
@@ -74,7 +74,7 @@ elements:
   - 74
   content:
     style: $title
-    text: La Grande Mission
+    text: Une paroisse de vocations
     wrap: true
     fontSize: 31
     bold: true
@@ -88,8 +88,8 @@ elements:
   - 164
   content:
     style: $body
-    text: Pendant trois semaines, une grande mission marque la communauté. Douze croix sont installées le long des routes,
-      sur une distance de trente-cinq milles.
+    text: Le Père Thomas Castonguay, premier enfant de la paroisse ordonné prêtre, l’est à Gand en 1923. Au fil des ans, Drummond
+      donne environ vingt prêtres et quarante religieux et religieuses.
     wrap: true
     color: '#2B2118'
     fontSize: 17
@@ -101,7 +101,7 @@ elements:
   - 428
   - 38
   - 38
-  iconName: fas:road
+  iconName: fas:hands-praying
   fill:
     type: solid
     color: '#B08A3C'
@@ -147,7 +147,7 @@ elements:
   - 14
   content:
     style: $footer
-    text: '10'
+    text: 08
     wrap: false
     color: '#6F6256'
     fontSize: 9

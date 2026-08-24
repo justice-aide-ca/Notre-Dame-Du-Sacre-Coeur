@@ -1,7 +1,7 @@
 pageType: content
 background:
   type: image
-  src: media/saint-georges-cote.jpg
+  src: media/saint-michel-aerienne.jpg
   fit:
     mode: cover
 elements:
@@ -12,7 +12,7 @@ elements:
   - 0
   - 960
   - 540
-  src: media/saint-georges-cote.jpg
+  src: media/saint-michel-aerienne.jpg
   fit:
     mode: cover
 - elementId: shade
@@ -65,7 +65,7 @@ elements:
   - 88
   content:
     style: $title
-    text: Une tradition de participation
+    text: La vigueur d’une paroisse rurale
     wrap: true
     color: '#F5F0E6'
     fontSize: 42
@@ -80,8 +80,8 @@ elements:
   - 126
   content:
     style: $body
-    text: 'Conseil de pastorale, lecteurs, ministres de la communion, préparation aux sacrements, chorale et bénévoles : Vatican
-      II a laissé à Saint-Georges un héritage de participation active.'
+    text: 'Église, écoles, caisse, Chevaliers de Colomb, Place Saint-Michel, chorales et bénévoles : Drummond témoigne d’une
+      foi enracinée dans la terre et dans l’entraide.'
     wrap: true
     color: '#F5F0E6'
     fontSize: 20
@@ -111,8 +111,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
-      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : contributions et François Foulem'
     wrap: false
     color: '#F5F0E6CC'
     fontSize: 8

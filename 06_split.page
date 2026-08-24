@@ -10,7 +10,7 @@ elements:
   - 0
   - 416
   - 540
-  src: media/saint-georges-sepia.jpg
+  src: media/saint-michel.jpg
   fit:
     mode: cover
 - elementId: image-shade
@@ -44,7 +44,7 @@ elements:
   - 62
   content:
     style: $year
-    text: '1951'
+    text: '1908'
     wrap: false
     color: '#7A2E2E'
     fontSize: 54
@@ -74,7 +74,7 @@ elements:
   - 74
   content:
     style: $title
-    text: Un orgue, puis une cloche
+    text: Une église plus spacieuse
     wrap: true
     fontSize: 31
     bold: true
@@ -88,8 +88,8 @@ elements:
   - 164
   content:
     style: $body
-    text: L’orgue est béni le 27 avril 1951. Le 25 novembre, une cloche reçoit les noms Roméo et Georges, en lien avec l’évêque
-      et le patron de la paroisse.
+    text: L’église actuelle est construite de 1906 à 1908. Le presbytère suit en 1915, puis la salle paroissiale à deux étages
+      en 1942.
     wrap: true
     color: '#2B2118'
     fontSize: 17
@@ -101,7 +101,7 @@ elements:
   - 428
   - 38
   - 38
-  iconName: fas:bell
+  iconName: fas:church
   fill:
     type: solid
     color: '#B08A3C'
@@ -130,8 +130,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
-      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : contributions et François Foulem'
     wrap: false
     color: '#6F6256'
     fontSize: 8

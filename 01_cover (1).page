@@ -21,7 +21,7 @@ elements:
   - 0
   - 522
   - 540
-  src: media/saint-michel.jpg
+  src: media/assomption-exterieur.jpg
   fit:
     mode: cover
 - elementId: accent-block
@@ -74,7 +74,7 @@ elements:
   - 128
   content:
     style: $title
-    text: Paroisse Saint-Michel
+    text: Paroisse Assomption
     wrap: true
     fontSize: 43
     bold: true
@@ -88,7 +88,7 @@ elements:
   - 34
   content:
     style: $subtitle
-    text: Drummond
+    text: Grand-Sault
     wrap: true
     color: '#7A2E2E'
     fontSize: 24
@@ -102,7 +102,7 @@ elements:
   - 32
   content:
     style: $label
-    text: 1860 · 1890 · 1908 · 1990
+    text: 1854 · 1868 · 1909 · aujourd’hui
     wrap: false
     color: '#2B2118'
     fontSize: 13
@@ -147,8 +147,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
-      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_grand-sault_assomption.html">Diocèse d’Edmundston</a> — page
+      historique, consultée le 7 août 2026 · Photos : contributions, Francis Denis et François Foulem'
     wrap: false
     color: '#6F6256'
     fontSize: 8

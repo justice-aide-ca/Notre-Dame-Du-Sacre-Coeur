@@ -1,21 +1,21 @@
-pageType: final
+pageType: content
 background:
   type: image
-  src: media/saint-michel.jpg
+  src: media/saint-georges-cote-sepia.jpg
   fit:
     mode: cover
 elements:
-- elementId: hero
+- elementId: background-image
   elementType: image
   bounds:
   - 0
   - 0
   - 960
   - 540
-  src: media/saint-michel.jpg
+  src: media/saint-georges-cote-sepia.jpg
   fit:
     mode: cover
-- elementId: shade
+- elementId: dark-overlay
   elementType: shape
   bounds:
   - 0
@@ -25,42 +25,27 @@ elements:
   shapeName: rect
   fill:
     type: solid
-    color: '#17110DCC'
+    color: '#17110DC7'
 - elementId: year
   elementType: text
   bounds:
   - 52
-  - 48
-  - 180
-  - 34
+  - 54
+  - 260
+  - 54
   content:
     style: $label
-    text: Merci
+    text: '1951'
     wrap: false
     color: '#B08A3C'
-    fontSize: 18
+    fontSize: 20
     bold: true
-- elementId: title
-  elementType: text
-  bounds:
-  - 52
-  - 118
-  - 760
-  - 116
-  content:
-    style: $title
-    text: Des terres fertiles, une foi transmise.
-    wrap: true
-    color: '#F5F0E6'
-    fontSize: 44
-    bold: true
-    lineHeight: 1.08
-- elementId: closing-rule
+- elementId: quote-rule
   elementType: line
   bounds:
   - 52
-  - 258
-  - 164
+  - 126
+  - 148
   - 1
   viewBox:
   - 1
@@ -71,35 +56,51 @@ elements:
     style: solid
     width: 4
     color: '#B08A3C'
+- elementId: title
+  elementType: text
+  bounds:
+  - 52
+  - 158
+  - 620
+  - 100
+  content:
+    style: $title
+    text: Construire une Maison-Dieu
+    wrap: true
+    color: '#F5F0E6'
+    fontSize: 46
+    bold: true
+    lineHeight: 1.05
+- elementId: quote-mark
+  elementType: text
+  bounds:
+  - 54
+  - 282
+  - 90
+  - 86
+  content:
+    style: $year
+    text: «
+    wrap: false
+    color: '#B08A3C'
+    fontSize: 78
+    bold: true
 - elementId: body
   elementType: text
   bounds:
-  - 52
+  - 144
   - 292
-  - 700
-  - 96
+  - 680
+  - 116
   content:
     style: $quote
-    text: Que saint Michel accompagne encore cette communauté qui a su faire grandir ensemble ses champs, ses écoles et son
-      Église.
+    text: 'Le contrat de construction est confié à Dollard Bélanger au coût de 770 000 $. Le curé écrit : « Nous avons confiance
+      que cette construction sera menée à bien. »'
     wrap: true
     color: '#F5F0E6'
-    fontSize: 22
+    fontSize: 24
     italic: true
     lineHeight: 1.35
-- elementId: signature
-  elementType: text
-  bounds:
-  - 52
-  - 432
-  - 620
-  - 24
-  content:
-    style: $label
-    text: Unité pastorale Notre-Dame-du-Sacré-Cœur — Diocèse d’Edmundston
-    wrap: false
-    color: '#F5F0E6'
-    fontSize: 11
 - elementId: footer-line
   elementType: line
   bounds:
@@ -125,8 +126,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
-      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
+      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
     wrap: false
     color: '#F5F0E6CC'
     fontSize: 8
@@ -142,7 +143,7 @@ elements:
   - 14
   content:
     style: $footer
-    text: '13'
+    text: '05'
     wrap: false
     color: '#F5F0E6CC'
     fontSize: 9

@@ -10,7 +10,7 @@ elements:
   - 0
   - 416
   - 540
-  src: media/saint-michel-aerienne.jpg
+  src: media/saint-andre-interieur-sepia.jpg
   fit:
     mode: cover
 - elementId: image-shade
@@ -44,7 +44,7 @@ elements:
   - 62
   content:
     style: $year
-    text: '1947'
+    text: Racines
     wrap: false
     color: '#7A2E2E'
     fontSize: 54
@@ -74,7 +74,7 @@ elements:
   - 74
   content:
     style: $title
-    text: La Grande Mission
+    text: Québec et Acadie se rencontrent
     wrap: true
     fontSize: 31
     bold: true
@@ -88,8 +88,8 @@ elements:
   - 164
   content:
     style: $body
-    text: Pendant trois semaines, une grande mission marque la communauté. Douze croix sont installées le long des routes,
-      sur une distance de trente-cinq milles.
+    text: Des familles venues de Québec et d’autres de descendance acadienne — Cormier, Godreau, Cyr, Mazerolle — prennent
+      part aux travaux de colonisation et façonnent le caractère du milieu.
     wrap: true
     color: '#2B2118'
     fontSize: 17
@@ -101,7 +101,7 @@ elements:
   - 428
   - 38
   - 38
-  iconName: fas:road
+  iconName: fas:people-group
   fill:
     type: solid
     color: '#B08A3C'
@@ -130,8 +130,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
-      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_st-andre.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : Google, Archives R. H. S.-J. et contributions'
     wrap: false
     color: '#6F6256'
     fontSize: 8
@@ -147,7 +147,7 @@ elements:
   - 14
   content:
     style: $footer
-    text: '10'
+    text: '04'
     wrap: false
     color: '#6F6256'
     fontSize: 9

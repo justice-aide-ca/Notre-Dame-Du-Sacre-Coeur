@@ -12,7 +12,7 @@ elements:
   - 50
   content:
     style: $label
-    text: Vie
+    text: Culture
     wrap: false
     color: '#7A2E2E'
     fontSize: 20
@@ -26,7 +26,7 @@ elements:
   - 70
   content:
     style: $title
-    text: Une communauté bilingue et active
+    text: Une communauté fière et accueillante
     wrap: true
     fontSize: 34
     bold: true
@@ -38,7 +38,7 @@ elements:
   - 0
   - 254
   - 540
-  src: media/assomption-interieur.jpg
+  src: media/saint-andre-interieur.jpg
   fit:
     mode: cover
 - elementId: right-shade
@@ -72,7 +72,7 @@ elements:
   - 36
   content:
     style: $subtitle
-    text: Liturgie
+    text: Langue
     wrap: false
     color: '#7A2E2E'
     fontSize: 21
@@ -86,7 +86,7 @@ elements:
   - 150
   content:
     style: $body
-    text: Deux comités de liturgie — francophone et anglophone — préparent des célébrations priantes et vivantes.
+    text: Les paroissiens sont en très grande majorité francophones.
     wrap: true
     color: '#2B2118'
     fontSize: 14
@@ -141,7 +141,7 @@ elements:
   - 150
   content:
     style: $body
-    text: 'Trois chorales soutiennent la prière : adultes francophones, adultes anglophones et jeunes.'
+    text: Saint-André est renommée pour ses nombreux chanteurs de talent.
     wrap: true
     color: '#2B2118'
     fontSize: 14
@@ -169,7 +169,7 @@ elements:
   - 184
   - 34
   - 34
-  iconName: fas:people-group
+  iconName: fas:handshake
   fill:
     type: solid
     color: '#B08A3C'
@@ -182,7 +182,7 @@ elements:
   - 36
   content:
     style: $subtitle
-    text: Catéchèse
+    text: Coopération
     wrap: false
     color: '#7A2E2E'
     fontSize: 21
@@ -196,7 +196,7 @@ elements:
   - 150
   content:
     style: $body
-    text: Les parents sont accompagnés par une équipe paroissiale pour préparer les enfants aux sacrements.
+    text: La Caisse Populaire et les activités communautaires témoignent d’un esprit d’entraide.
     wrap: true
     color: '#2B2118'
     fontSize: 14
@@ -226,8 +226,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_grand-sault_assomption.html">Diocèse d’Edmundston</a> — page
-      historique, consultée le 7 août 2026 · Photos : contributions, Francis Denis et François Foulem'
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_st-andre.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : Google, Archives R. H. S.-J. et contributions'
     wrap: false
     color: '#6F6256'
     fontSize: 8
@@ -243,7 +243,7 @@ elements:
   - 14
   content:
     style: $footer
-    text: 08
+    text: '07'
     wrap: false
     color: '#6F6256'
     fontSize: 9

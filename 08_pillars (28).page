@@ -12,7 +12,7 @@ elements:
   - 50
   content:
     style: $label
-    text: Vie
+    text: '1956'
     wrap: false
     color: '#7A2E2E'
     fontSize: 20
@@ -26,7 +26,7 @@ elements:
   - 70
   content:
     style: $title
-    text: Une communauté bilingue et active
+    text: Une paroisse qui grandit
     wrap: true
     fontSize: 34
     bold: true
@@ -38,7 +38,7 @@ elements:
   - 0
   - 254
   - 540
-  src: media/assomption-interieur.jpg
+  src: media/saint-georges.jpg
   fit:
     mode: cover
 - elementId: right-shade
@@ -59,7 +59,7 @@ elements:
   - 184
   - 34
   - 34
-  iconName: fas:language
+  iconName: fas:graduation-cap
   fill:
     type: solid
     color: '#B08A3C'
@@ -72,7 +72,7 @@ elements:
   - 36
   content:
     style: $subtitle
-    text: Liturgie
+    text: École
     wrap: false
     color: '#7A2E2E'
     fontSize: 21
@@ -86,7 +86,7 @@ elements:
   - 150
   content:
     style: $body
-    text: Deux comités de liturgie — francophone et anglophone — préparent des célébrations priantes et vivantes.
+    text: L’école Marie-Immaculée est bénie le 25 août 1956, pour l’éducation civile et religieuse des jeunes.
     wrap: true
     color: '#2B2118'
     fontSize: 14
@@ -114,7 +114,7 @@ elements:
   - 184
   - 34
   - 34
-  iconName: fas:music
+  iconName: fas:hands-praying
   fill:
     type: solid
     color: '#B08A3C'
@@ -127,7 +127,7 @@ elements:
   - 36
   content:
     style: $subtitle
-    text: Musique
+    text: Vocation
     wrap: false
     color: '#7A2E2E'
     fontSize: 21
@@ -141,7 +141,7 @@ elements:
   - 150
   content:
     style: $body
-    text: 'Trois chorales soutiennent la prière : adultes francophones, adultes anglophones et jeunes.'
+    text: Le 31 mai 1958, le Père Normand Godbout est ordonné prêtre dans l’église Saint-Georges.
     wrap: true
     color: '#2B2118'
     fontSize: 14
@@ -169,7 +169,7 @@ elements:
   - 184
   - 34
   - 34
-  iconName: fas:people-group
+  iconName: fas:cross
   fill:
     type: solid
     color: '#B08A3C'
@@ -182,7 +182,7 @@ elements:
   - 36
   content:
     style: $subtitle
-    text: Catéchèse
+    text: Deuil
     wrap: false
     color: '#7A2E2E'
     fontSize: 21
@@ -196,7 +196,7 @@ elements:
   - 150
   content:
     style: $body
-    text: Les parents sont accompagnés par une équipe paroissiale pour préparer les enfants aux sacrements.
+    text: Le Père Dubé meurt le 16 juin 1959. Sa pierre tombale rappelle la reconnaissance des paroissiens.
     wrap: true
     color: '#2B2118'
     fontSize: 14
@@ -226,8 +226,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_grand-sault_assomption.html">Diocèse d’Edmundston</a> — page
-      historique, consultée le 7 août 2026 · Photos : contributions, Francis Denis et François Foulem'
+    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
+      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
     wrap: false
     color: '#6F6256'
     fontSize: 8

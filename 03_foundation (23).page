@@ -3,58 +3,26 @@ background:
   type: solid
   color: '#F5F0E6'
 elements:
-- elementId: main-image
-  elementType: image
-  bounds:
-  - 544
-  - 0
-  - 416
-  - 540
-  src: media/saint-michel.jpg
-  fit:
-    mode: cover
-- elementId: image-shade
-  elementType: shape
-  bounds:
-  - 544
-  - 0
-  - 416
-  - 540
-  shapeName: rect
-  fill:
-    type: solid
-    color: '#17110D22'
-- elementId: accent-edge
-  elementType: shape
-  bounds:
-  - 524
-  - 0
-  - 20
-  - 540
-  shapeName: rect
-  fill:
-    type: solid
-    color: '#7A2E2E'
-- elementId: year
+- elementId: giant-year
   elementType: text
   bounds:
   - 52
-  - 54
-  - 432
-  - 62
+  - 58
+  - 270
+  - 92
   content:
     style: $year
-    text: '1940'
+    text: '1950'
     wrap: false
     color: '#7A2E2E'
-    fontSize: 54
+    fontSize: 78
     bold: true
-- elementId: title-rule
+- elementId: giant-rule
   elementType: line
   bounds:
   - 52
-  - 124
-  - 108
+  - 160
+  - 180
   - 1
   viewBox:
   - 1
@@ -63,48 +31,58 @@ elements:
   curve: sharp
   border:
     style: solid
-    width: 3
+    width: 4
     color: '#B08A3C'
 - elementId: title
   elementType: text
   bounds:
-  - 52
-  - 146
-  - 432
-  - 74
+  - 360
+  - 72
+  - 520
+  - 78
   content:
     style: $title
-    text: Le Congrès eucharistique
+    text: Le décret de Mgr Gagnon
     wrap: true
-    fontSize: 31
+    fontSize: 38
     bold: true
-    lineHeight: 1.08
+    lineHeight: 1.06
 - elementId: body
   elementType: text
   bounds:
-  - 52
-  - 238
-  - 432
-  - 164
+  - 360
+  - 168
+  - 500
+  - 130
   content:
     style: $body
-    text: Pour son cinquantenaire, la paroisse vit trois jours de Congrès eucharistique. La procession de clôture s’étend
-      sur un mille.
+    text: Le 22 juillet 1950, Mgr Joseph-Roméo Gagnon érige canoniquement Saint-Georges. Le Père Cyr Dubé, originaire de Saint-André
+      et docteur en droit canon, devient le curé fondateur.
     wrap: true
     color: '#2B2118'
-    fontSize: 17
+    fontSize: 18
     lineHeight: 1.42
-- elementId: icon
-  elementType: icon
+- elementId: wide-image
+  elementType: image
   bounds:
   - 52
-  - 428
-  - 38
-  - 38
-  iconName: fas:cross
+  - 332
+  - 856
+  - 142
+  src: media/saint-georges-cote-sepia.jpg
+  fit:
+    mode: cover
+- elementId: wide-shade
+  elementType: shape
+  bounds:
+  - 52
+  - 332
+  - 856
+  - 142
+  shapeName: rect
   fill:
     type: solid
-    color: '#B08A3C'
+    color: '#17110D30'
 - elementId: footer-line
   elementType: line
   bounds:
@@ -130,8 +108,8 @@ elements:
   - 14
   content:
     style: $footer
-    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
-      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    text: 'Source : <a href="https://www.diocese-edmundston.ca/fr/zp_grand-sault_st-georges.html">Diocèse d’Edmundston</a>
+      — page historique, consultée le 7 août 2026 · Photos : Google, via le diocèse d’Edmundston'
     wrap: false
     color: '#6F6256'
     fontSize: 8
@@ -147,7 +125,7 @@ elements:
   - 14
   content:
     style: $footer
-    text: 09
+    text: '03'
     wrap: false
     color: '#6F6256'
     fontSize: 9
