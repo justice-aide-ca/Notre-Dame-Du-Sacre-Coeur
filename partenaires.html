@@ -1,166 +1,78 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nos partenaires — Unité Pastorale Notre-Dame-du-Sacré-Cœur</title>
-  <meta name="description" content="Unité pastorale Notre-Dame-du-Sacré-Cœur — Quatre paroisses, une même famille de foi.">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partenaires — Unité pastorale</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-top">
-        <div class="site-title">
-          Notre-Dame-du-Sacré-Cœur
-          <small>Unité pastorale — Diocèse d'Edmundston</small>
-        </div>
-        <div class="header-actions">
-          <a href="index.html#dons" class="btn-don">❤ Faire un don</a>
-          <span class="lang-switch"><a href="#">FR</a> / <a href="#">EN</a></span>
-          <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">☰</button>
-        </div>
-      </div>
-      <nav class="main-nav" id="mainNav">
-        <a href="index.html" class="">Accueil</a>
-        <a href="paroisses/assomption.html" class="">Assomption</a>
-        <a href="paroisses/saint-georges.html" class="">Saint-Georges</a>
-        <a href="paroisses/saint-andre.html" class="">Saint-André</a>
-        <a href="paroisses/saint-michel.html" class="">Saint-Michel</a>
-        <a href="horaires.html" class="">Horaires</a>
-        <a href="services.html" class="">Services</a>
-        <a href="bulletin.html" class="">Bulletin</a>
-        <a href="transparence.html" class="">Transparence</a>
-        <a href="partenaires.html" class="active">Partenaires</a>
-      </nav>
+<header class="site-header">
+  <div class="inner">
+    <div class="logo">Unité pastorale <span>Sacré-Cœur</span></div>
+    <nav class="site-nav" id="mainNav">
+      <a href="index.html" class="">Tableau de bord</a>
+<a href="horaires.html" class="">Horaires</a>
+<a href="services.html" class="">Services</a>
+<a href="bulletin.html" class="">Bulletin</a>
+<a href="transparence.html" class="">Transparence</a>
+<a href="partenaires.html" class="active">Partenaires</a>
+<a href="videos.html" class="">Vidéos</a>
+<a href="musique.html" class="">Musique</a>
+    </nav>
+    <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+<div class="partners-banner">
+  <strong>Partenaires :</strong> Diocèse d'Edmundston · Fondation catholique du Nord-Ouest · CCCD-NB
+</div>
+
+<div class="container">
+  <div class="page-title">Nos partenaires</div>
+  <div class="page-sub">Ils soutiennent l'unité pastorale Sacré-Cœur</div>
+
+  <div class="grid grid-4">
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:8px;">🏛</div>
+      <div style="font-weight:600;">Diocèse d'Edmundston</div>
+      <p style="font-size:13px;color:var(--text-light);">Autorité ecclésiastique du Nord-Ouest du Nouveau-Brunswick</p>
     </div>
-  </header>
-
-  <main class="main-content">
-
-    <div class="hero hero-small">
-      <div class="hero-content">
-        <h1>Nos partenaires</h1>
-        <p>Ils soutiennent la vie de nos paroisses</p>
-      </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:8px;">💰</div>
+      <div style="font-weight:600;">Fondation catholique du Nord-Ouest</div>
+      <p style="font-size:13px;color:var(--text-light);">Soutien financier aux projets pastoraux</p>
     </div>
-
-    <div class="section">
-      <h2>Merci à nos partenaires</h2>
-      <p>L'unité pastorale Notre-Dame-du-Sacré-Cœur remercie chaleureusement les entreprises, organismes et particuliers qui soutiennent par leur générosité la vie de nos quatre paroisses. Leur engagement permet l'entretien de nos églises, le développement de la catéchèse et l'organisation d'événements communautaires.</p>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:8px;">📚</div>
+      <div style="font-weight:600;">CCCD-NB</div>
+      <p style="font-size:13px;color:var(--text-light);">Conseil des collèges communautaires du Diocèse</p>
     </div>
-
-    <div class="section">
-      <h2>Partenaires majeurs</h2>
-      <div class="partners-page-grid">
-        <div class="partner-card">
-          <div class="logo-placeholder">Logo entreprise</div>
-          <h4>Nom de l'entreprise A</h4>
-          <p>Description courte du partenaire et de son soutien à l'unité pastorale.</p>
-          <a href="#" class="partner-link" target="_blank">Visiter le site →</a>
-        </div>
-        <div class="partner-card">
-          <div class="logo-placeholder">Logo entreprise</div>
-          <h4>Nom de l'entreprise B</h4>
-          <p>Description courte du partenaire et de son soutien à l'unité pastorale.</p>
-          <a href="#" class="partner-link" target="_blank">Visiter le site →</a>
-        </div>
-        <div class="partner-card">
-          <div class="logo-placeholder">Logo entreprise</div>
-          <h4>Nom de l'entreprise C</h4>
-          <p>Description courte du partenaire et de son soutien à l'unité pastorale.</p>
-          <a href="#" class="partner-link" target="_blank">Visiter le site →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>Partenaires réguliers</h2>
-      <div class="partners-page-grid">
-        <div class="partner-card">
-          <div class="logo-placeholder">Logo</div>
-          <h4>Partenaire D</h4>
-          <p>Soutien aux activités de la jeunesse.</p>
-        </div>
-        <div class="partner-card">
-          <div class="logo-placeholder">Logo</div>
-          <h4>Partenaire E</h4>
-          <p>Soutien à l'entretien des églises.</p>
-        </div>
-        <div class="partner-card">
-          <div class="logo-placeholder">Logo</div>
-          <h4>Partenaire F</h4>
-          <p>Soutien aux événements communautaires.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section section-don">
-      <h2>Devenir partenaire</h2>
-      <p>Votre entreprise ou organisation souhaite soutenir la vie de nos paroisses ? Nous proposons plusieurs niveaux de partenariat, du soutien ponctuel à un engagement annuel.</p>
-      <p class="mt-1"><strong>Avantages pour nos partenaires :</strong></p>
-      <ul>
-        <li>Mention sur notre site web et dans le bulletin paroissial</li>
-        <li>Visibilité lors des événements de l'unité pastorale</li>
-        <li>Accès privilégié aux activités communautaires</li>
-        <li>Reçu fiscal pour dons de 20 $ et plus</li>
-      </ul>
-      <div class="btn-group mt-2">
-        <a href="#" class="btn btn-accent">📧 Nous contacter</a>
-        <a href="transparence.html" class="btn">Voir nos rapports</a>
-      </div>
-    </div>
-  </main>
-
-  <div class="partners-section">
-    <h4>Nos partenaires</h4>
-    <div class="partners-logos">
-      <a href="partenaires.html" class="partner-logo">
-        <div class="logo-placeholder">Logo</div>
-        <span>Entreprise A</span>
-      </a>
-      <a href="partenaires.html" class="partner-logo">
-        <div class="logo-placeholder">Logo</div>
-        <span>Entreprise B</span>
-      </a>
-      <a href="partenaires.html" class="partner-logo">
-        <div class="logo-placeholder">Logo</div>
-        <span>Entreprise C</span>
-      </a>
-      <a href="partenaires.html" class="partner-logo">
-        <div class="logo-placeholder">Logo</div>
-        <span>+ Devenir partenaire</span>
-      </a>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:32px;margin-bottom:8px;">🤝</div>
+      <div style="font-weight:600;">Banque alimentaire locale</div>
+      <p style="font-size:13px;color:var(--text-light);">Partenariat pour les dîners communautaires</p>
     </div>
   </div>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-col">
-        <h4>Unité pastorale</h4>
-        <p>Notre-Dame-du-Sacré-Cœur</p>
-        <p>Diocèse d'Edmundston</p>
-        <p>Nouveau-Brunswick, Canada</p>
-      </div>
-      <div class="footer-col">
-        <h4>Nos paroisses</h4>
-        <a href="paroisses/assomption.html">Assomption</a>
-        <a href="paroisses/saint-georges.html">Saint-Georges</a>
-        <a href="paroisses/saint-andre.html">Saint-André</a>
-        <a href="paroisses/saint-michel.html">Saint-Michel</a>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Tél. : (506) XXX-XXXX</p>
-        <p>contact@notre-dame-sacre-coeur.ca</p>
-        <p>Lun–Ven : 9h–12h / 13h–16h</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © 2026 Unité pastorale Notre-Dame-du-Sacré-Cœur — Tous droits réservés
-    </div>
-  </footer>
+  <div class="card mt-1">
+    <div class="section-title">Devenir partenaire</div>
+    <p>Votre entreprise ou organisation souhaite soutenir l'unité pastorale Sacré-Cœur ? Contactez-nous pour discuter des modalités de partenariat.</p>
+    <p style="margin-top:12px;"><a href="mailto:partenariats@unite-pastorale.ca" class="btn btn-primary">Nous contacter</a></p>
+  </div>
+</div>
 
-  <script src="js/main.js"></script>
+<footer class="site-footer">
+  <div class="inner">
+    <div>
+      <strong style="color:#fff;">Unité pastorale Sacré-Cœur</strong><br>
+      Diocèse d'Edmundston, Nouveau-Brunswick
+    </div>
+    <div style="text-align:right;">
+      <a href="mailto:contact@unite-pastorale.ca">contact@unite-pastorale.ca</a><br>
+      Tél. (506) 735-XXXX
+    </div>
+  </div>
+</footer>
+<script src="js/app.js"></script>
 </body>
 </html>

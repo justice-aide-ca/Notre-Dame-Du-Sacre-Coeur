@@ -1,52 +1,70 @@
-# Site de l'Unité Pastorale Notre-Dame-du-Sacré-Cœur
+# Unité pastorale Sacré-Cœur — Site de gestion pastorale
 
-## Déploiement sur GitHub Pages
+Site statique complet avec gestion d'activités pastorales via localStorage (niveau 1).
 
-1. Créez un nouveau repository sur GitHub (ex: `notre-dame-sacre-coeur`)
-2. Téléversez tous les fichiers de ce dossier à la racine du repository
-3. Allez dans **Settings > Pages**
-4. Sélectionnez la branche `main` et le dossier `/ (root)`
-5. Votre site sera accessible à `https://votre-org.github.io/notre-dame-sacre-coeur/`
-
-## Structure du site
+## 📁 Structure
 
 ```
-├── index.html              # Page d'accueil
-├── horaires.html           # Horaires des messes
-├── bulletin.html           # Bulletin paroissial
-├── transparence.html       # Rapports financiers et pastoraux
-├── partenaires.html        # Page des commanditaires
-├── css/
-│   └── style.css           # Styles complets
-├── js/
-│   └── main.js             # Scripts (menu mobile)
+├── index.html              → Tableau de bord (stats, formulaire, graphiques)
+├── horaires.html           → Horaires des messes des 4 paroisses
+├── services.html           → Baptême, mariage, funérailles, onction, catéchèse, bénévolat
+├── bulletin.html           → Bulletin paroissial Le Sacré-Cœur
+├── transparence.html       → Rapports financiers et pastoraux
+├── partenaires.html        → Commanditaires + espace "Devenir partenaire"
+├── videos.html             → Films et vidéos pastorales
+├── musique.html            → Mélodies mariales + lecteur audio
 ├── paroisses/
-│   ├── assomption.html     # Page paroisse Assomption
-│   ├── saint-georges.html  # Page paroisse Saint-Georges
-│   ├── saint-andre.html    # Page paroisse Saint-André
-│   └── saint-michel.html   # Page paroisse Saint-Michel
-└── documents/              # Dossier pour les PDF (rapports, bulletins)
+│   ├── assomption.html
+│   ├── saint-georges.html
+│   ├── saint-andre.html
+│   └── saint-michel.html
+├── css/style.css           → Feuille de styles unique
+├── js/app.js               → Logique complète (localStorage, stats, rapports, lecteur)
+├── images/                 → Placez vos images ici
+├── videos/                 → Placez vos MP4 ici
+├── audio/                  → Placez vos MP3 ici
+└── documents/              → Placez vos PDF de rapports ici
 ```
 
-## Personnalisation
+## 🚀 Utilisation immédiate (niveau 1)
 
-Remplacez les éléments marqués `[À compléter]` par vos informations réelles :
-- Numéros de téléphone
-- Adresses postales
-- Adresses courriel
-- Coordonnées du secrétariat
+1. **Téléchargez** le ZIP et extrayez-le sur votre ordinateur
+2. **Double-cliquez** sur `index.html` — le site s'ouvre dans votre navigateur
+3. **Testez** le formulaire d'activité : remplissez, cliquez "Enregistrer", voyez les stats se mettre à jour
+4. **Naviguez** entre les pages via le menu en haut
 
-## Ajouter un partenaire
+> ⚠️ En niveau 1, les données restent dans **votre navigateur uniquement** (localStorage). Chaque ordinateur voit ses propres données. Pour un accès partagé depuis plusieurs appareils, passez au niveau 2 (Firebase).
 
-1. Remplacez les placeholders dans `partenaires.html`
-2. Ajoutez le logo dans le dossier `images/` (à créer)
-3. Mettez à jour le bandeau dans le footer de toutes les pages
+## 🎵 Médias
 
-## Ajouter un rapport
+- **Vidéos** : placez vos fichiers MP4 dans `videos/`
+- **Musique** : placez vos fichiers MP3 dans `audio/`
+- Les pages `videos.html` et `musique.html` les afficheront automatiquement
 
-1. Placez le PDF dans le dossier `documents/`
-2. Ajoutez une entrée dans `transparence.html`
+## 📊 Rapports
 
-## Mises à jour du bulletin
+- Allez dans l'onglet **Rapports** (intégré au tableau de bord via le menu)
+- Sélectionnez un mois et une année
+- Le bilan se génère automatiquement à partir des activités enregistrées
+- Cliquez sur **Exporter** pour télécharger le rapport en fichier texte
 
-Modifiez directement `bulletin.html` chaque semaine, ou créez des pages archivées.
+## 🛠 Personnalisation
+
+Ouvrez les fichiers HTML dans un éditeur de texte (Notepad, VS Code, etc.) et modifiez :
+- Les numéros de téléphone `(506) XXX-XXXX`
+- Les adresses courriel `[À compléter]`
+- Les noms des paroisses et du curé
+- Les horaires de messes
+
+## 🔮 Passage au niveau 2 (Firebase)
+
+Si vous souhaitez que le secrétariat, le curé et les bénévoles voient les mêmes données depuis n'importe quel appareil :
+
+1. Créez un projet sur [console.firebase.google.com](https://console.firebase.google.com)
+2. Activez **Cloud Firestore**
+3. Remplacez la logique localStorage par les appels Firebase dans `js/app.js`
+4. Déployez sur GitHub Pages ou Firebase Hosting
+
+---
+
+*Unité pastorale Sacré-Cœur — Diocèse d'Edmundston*
