@@ -1,0 +1,253 @@
+pageType: content
+background:
+  type: solid
+  color: '#F5F0E6'
+elements:
+- elementId: year
+  elementType: text
+  bounds:
+  - 52
+  - 48
+  - 240
+  - 50
+  content:
+    style: $label
+    text: École
+    wrap: false
+    color: '#7A2E2E'
+    fontSize: 20
+    bold: true
+- elementId: title
+  elementType: text
+  bounds:
+  - 52
+  - 88
+  - 620
+  - 70
+  content:
+    style: $title
+    text: Douze écoles, puis deux écoles centrales
+    wrap: true
+    fontSize: 34
+    bold: true
+    lineHeight: 1.08
+- elementId: right-image
+  elementType: image
+  bounds:
+  - 706
+  - 0
+  - 254
+  - 540
+  src: media/saint-michel-aerienne.jpg
+  fit:
+    mode: cover
+- elementId: right-shade
+  elementType: shape
+  bounds:
+  - 706
+  - 0
+  - 254
+  - 540
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#17110D25'
+- elementId: icon-0
+  elementType: icon
+  bounds:
+  - 52
+  - 184
+  - 34
+  - 34
+  iconName: fas:school
+  fill:
+    type: solid
+    color: '#B08A3C'
+- elementId: head-0
+  elementType: text
+  bounds:
+  - 52
+  - 238
+  - 190
+  - 36
+  content:
+    style: $subtitle
+    text: Écoles rurales
+    wrap: false
+    color: '#7A2E2E'
+    fontSize: 21
+    bold: true
+- elementId: body-0
+  elementType: text
+  bounds:
+  - 52
+  - 284
+  - 190
+  - 150
+  content:
+    style: $body
+    text: Environ douze écoles d’un ou deux départements permettent aux enfants de se rendre jusqu’en 8e année.
+    wrap: true
+    color: '#2B2118'
+    fontSize: 14
+    lineHeight: 1.35
+- elementId: pillar-rule-1
+  elementType: line
+  bounds:
+  - 246
+  - 190
+  - 1
+  - 240
+  viewBox:
+  - 1
+  - 1
+  points: 0,0 0,1
+  curve: sharp
+  border:
+    style: solid
+    width: 1
+    color: '#7A2E2E44'
+- elementId: icon-1
+  elementType: icon
+  bounds:
+  - 274
+  - 184
+  - 34
+  - 34
+  iconName: fas:graduation-cap
+  fill:
+    type: solid
+    color: '#B08A3C'
+- elementId: head-1
+  elementType: text
+  bounds:
+  - 274
+  - 238
+  - 190
+  - 36
+  content:
+    style: $subtitle
+    text: '1949'
+    wrap: false
+    color: '#7A2E2E'
+    fontSize: 21
+    bold: true
+- elementId: body-1
+  elementType: text
+  bounds:
+  - 274
+  - 284
+  - 190
+  - 150
+  content:
+    style: $body
+    text: L’Académie Notre-Dame ouvre l’accès à une éducation de la 1re à la 12e année.
+    wrap: true
+    color: '#2B2118'
+    fontSize: 14
+    lineHeight: 1.35
+- elementId: pillar-rule-2
+  elementType: line
+  bounds:
+  - 468
+  - 190
+  - 1
+  - 240
+  viewBox:
+  - 1
+  - 1
+  points: 0,0 0,1
+  curve: sharp
+  border:
+    style: solid
+    width: 1
+    color: '#7A2E2E44'
+- elementId: icon-2
+  elementType: icon
+  bounds:
+  - 496
+  - 184
+  - 34
+  - 34
+  iconName: fas:book-open
+  fill:
+    type: solid
+    color: '#B08A3C'
+- elementId: head-2
+  elementType: text
+  bounds:
+  - 496
+  - 238
+  - 178
+  - 36
+  content:
+    style: $subtitle
+    text: '1962'
+    wrap: false
+    color: '#7A2E2E'
+    fontSize: 21
+    bold: true
+- elementId: body-2
+  elementType: text
+  bounds:
+  - 496
+  - 284
+  - 178
+  - 150
+  content:
+    style: $body
+    text: L’École supérieure Mgr Lang répond aux besoins grandissants; les écoles rurales ferment graduellement.
+    wrap: true
+    color: '#2B2118'
+    fontSize: 14
+    lineHeight: 1.35
+- elementId: footer-line
+  elementType: line
+  bounds:
+  - 52
+  - 510
+  - 856
+  - 1
+  viewBox:
+  - 1
+  - 1
+  points: 0,0 1,0
+  curve: sharp
+  border:
+    style: solid
+    width: 1
+    color: '#7A2E2E55'
+- elementId: source
+  elementType: text
+  bounds:
+  - 52
+  - 518
+  - 720
+  - 14
+  content:
+    style: $footer
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    wrap: false
+    color: '#6F6256'
+    fontSize: 8
+    align:
+    - left
+    - middle
+- elementId: page-num
+  elementType: text
+  bounds:
+  - 820
+  - 518
+  - 88
+  - 14
+  content:
+    style: $footer
+    text: '07'
+    wrap: false
+    color: '#6F6256'
+    fontSize: 9
+    bold: true
+    align:
+    - right
+    - middle

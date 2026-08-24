@@ -1,0 +1,410 @@
+pageType: content
+background:
+  type: solid
+  color: '#F5F0E6'
+elements:
+- elementId: year
+  elementType: text
+  bounds:
+  - 52
+  - 46
+  - 220
+  - 48
+  content:
+    style: $label
+    text: Jalons
+    wrap: false
+    color: '#7A2E2E'
+    fontSize: 20
+    bold: true
+- elementId: title
+  elementType: text
+  bounds:
+  - 52
+  - 86
+  - 600
+  - 58
+  content:
+    style: $title
+    text: De la mission à la paroisse
+    wrap: true
+    fontSize: 34
+    bold: true
+    lineHeight: 1.08
+- elementId: main-line
+  elementType: line
+  bounds:
+  - 70
+  - 278
+  - 820
+  - 1
+  viewBox:
+  - 1
+  - 1
+  points: 0,0 1,0
+  curve: sharp
+  border:
+    style: solid
+    width: 3
+    color: '#7A2E2E'
+- elementId: node-0
+  elementType: shape
+  bounds:
+  - 61
+  - 269
+  - 18
+  - 18
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#B08A3C'
+  border:
+    style: solid
+    width: 3
+    color: '#F5F0E6'
+- elementId: yr-0
+  elementType: text
+  bounds:
+  - 12
+  - 170
+  - 116
+  - 34
+  content:
+    style: $subtitle
+    text: '1854'
+    wrap: true
+    color: '#7A2E2E'
+    fontSize: 21
+    bold: true
+    align:
+    - center
+    - middle
+- elementId: label-0
+  elementType: text
+  bounds:
+  - 2
+  - 208
+  - 136
+  - 48
+  content:
+    style: $footer
+    text: Première messe à Grand-Sault
+    wrap: true
+    color: '#2B2118'
+    fontSize: 11
+    align:
+    - center
+    - top
+    lineHeight: 1.2
+- elementId: node-1
+  elementType: shape
+  bounds:
+  - 225
+  - 269
+  - 18
+  - 18
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#B08A3C'
+  border:
+    style: solid
+    width: 3
+    color: '#F5F0E6'
+- elementId: yr-1
+  elementType: text
+  bounds:
+  - 176
+  - 300
+  - 116
+  - 34
+  content:
+    style: $subtitle
+    text: '1868'
+    wrap: true
+    color: '#7A2E2E'
+    fontSize: 21
+    bold: true
+    align:
+    - center
+    - middle
+- elementId: label-1
+  elementType: text
+  bounds:
+  - 166
+  - 338
+  - 136
+  - 58
+  content:
+    style: $footer
+    text: Érection canonique
+    wrap: true
+    color: '#2B2118'
+    fontSize: 11
+    align:
+    - center
+    - top
+    lineHeight: 1.2
+- elementId: node-2
+  elementType: shape
+  bounds:
+  - 389
+  - 269
+  - 18
+  - 18
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#B08A3C'
+  border:
+    style: solid
+    width: 3
+    color: '#F5F0E6'
+- elementId: yr-2
+  elementType: text
+  bounds:
+  - 340
+  - 170
+  - 116
+  - 34
+  content:
+    style: $subtitle
+    text: '1885'
+    wrap: true
+    color: '#7A2E2E'
+    fontSize: 21
+    bold: true
+    align:
+    - center
+    - middle
+- elementId: label-2
+  elementType: text
+  bounds:
+  - 330
+  - 208
+  - 136
+  - 48
+  content:
+    style: $footer
+    text: Ouverture de la première église
+    wrap: true
+    color: '#2B2118'
+    fontSize: 11
+    align:
+    - center
+    - top
+    lineHeight: 1.2
+- elementId: node-3
+  elementType: shape
+  bounds:
+  - 553
+  - 269
+  - 18
+  - 18
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#B08A3C'
+  border:
+    style: solid
+    width: 3
+    color: '#F5F0E6'
+- elementId: yr-3
+  elementType: text
+  bounds:
+  - 504
+  - 300
+  - 116
+  - 34
+  content:
+    style: $subtitle
+    text: '1906'
+    wrap: true
+    color: '#7A2E2E'
+    fontSize: 21
+    bold: true
+    align:
+    - center
+    - middle
+- elementId: label-3
+  elementType: text
+  bounds:
+  - 494
+  - 338
+  - 136
+  - 58
+  content:
+    style: $footer
+    text: Incendie
+    wrap: true
+    color: '#2B2118'
+    fontSize: 11
+    align:
+    - center
+    - top
+    lineHeight: 1.2
+- elementId: node-4
+  elementType: shape
+  bounds:
+  - 717
+  - 269
+  - 18
+  - 18
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#B08A3C'
+  border:
+    style: solid
+    width: 3
+    color: '#F5F0E6'
+- elementId: yr-4
+  elementType: text
+  bounds:
+  - 668
+  - 170
+  - 116
+  - 34
+  content:
+    style: $subtitle
+    text: '1909'
+    wrap: true
+    color: '#7A2E2E'
+    fontSize: 21
+    bold: true
+    align:
+    - center
+    - middle
+- elementId: label-4
+  elementType: text
+  bounds:
+  - 658
+  - 208
+  - 136
+  - 48
+  content:
+    style: $footer
+    text: Ouverture de l’église actuelle
+    wrap: true
+    color: '#2B2118'
+    fontSize: 11
+    align:
+    - center
+    - top
+    lineHeight: 1.2
+- elementId: node-5
+  elementType: shape
+  bounds:
+  - 881
+  - 269
+  - 18
+  - 18
+  shapeName: ellipse
+  fill:
+    type: solid
+    color: '#B08A3C'
+  border:
+    style: solid
+    width: 3
+    color: '#F5F0E6'
+- elementId: yr-5
+  elementType: text
+  bounds:
+  - 832
+  - 300
+  - 116
+  - 34
+  content:
+    style: $subtitle
+    text: '1924'
+    wrap: true
+    color: '#7A2E2E'
+    fontSize: 21
+    bold: true
+    align:
+    - center
+    - middle
+- elementId: label-5
+  elementType: text
+  bounds:
+  - 822
+  - 338
+  - 136
+  - 58
+  content:
+    style: $footer
+    text: Arrivée des religieuses
+    wrap: true
+    color: '#2B2118'
+    fontSize: 11
+    align:
+    - center
+    - top
+    lineHeight: 1.2
+- elementId: timeline-note
+  elementType: text
+  bounds:
+  - 52
+  - 444
+  - 700
+  - 30
+  content:
+    style: $quote
+    text: 'Chaque date est une étape d’une même histoire : des personnes, un lieu, une foi transmise.'
+    wrap: true
+    color: '#6F6256'
+    fontSize: 16
+    italic: true
+    align:
+    - left
+    - middle
+- elementId: footer-line
+  elementType: line
+  bounds:
+  - 52
+  - 510
+  - 856
+  - 1
+  viewBox:
+  - 1
+  - 1
+  points: 0,0 1,0
+  curve: sharp
+  border:
+    style: solid
+    width: 1
+    color: '#7A2E2E55'
+- elementId: source
+  elementType: text
+  bounds:
+  - 52
+  - 518
+  - 720
+  - 14
+  content:
+    style: $footer
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_grand-sault_assomption.html">Diocèse d’Edmundston</a> — page
+      historique, consultée le 7 août 2026 · Photos : contributions, Francis Denis et François Foulem'
+    wrap: false
+    color: '#6F6256'
+    fontSize: 8
+    align:
+    - left
+    - middle
+- elementId: page-num
+  elementType: text
+  bounds:
+  - 820
+  - 518
+  - 88
+  - 14
+  content:
+    style: $footer
+    text: '10'
+    wrap: false
+    color: '#6F6256'
+    fontSize: 9
+    bold: true
+    align:
+    - right
+    - middle

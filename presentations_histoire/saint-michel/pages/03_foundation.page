@@ -1,0 +1,135 @@
+pageType: content
+background:
+  type: solid
+  color: '#F5F0E6'
+elements:
+- elementId: giant-year
+  elementType: text
+  bounds:
+  - 52
+  - 58
+  - 270
+  - 92
+  content:
+    style: $year
+    text: '1890'
+    wrap: false
+    color: '#7A2E2E'
+    fontSize: 78
+    bold: true
+- elementId: giant-rule
+  elementType: line
+  bounds:
+  - 52
+  - 160
+  - 180
+  - 1
+  viewBox:
+  - 1
+  - 1
+  points: 0,0 1,0
+  curve: sharp
+  border:
+    style: solid
+    width: 4
+    color: '#B08A3C'
+- elementId: title
+  elementType: text
+  bounds:
+  - 360
+  - 72
+  - 520
+  - 78
+  content:
+    style: $title
+    text: La paroisse est érigée
+    wrap: true
+    fontSize: 38
+    bold: true
+    lineHeight: 1.06
+- elementId: body
+  elementType: text
+  bounds:
+  - 360
+  - 168
+  - 500
+  - 130
+  content:
+    style: $body
+    text: Le 29 septembre 1890, Mgr James Rogers érige canoniquement Saint-Michel de Drummond. Le Père Georges B. Gauvin devient
+      le premier curé et achète les terrains de la future église.
+    wrap: true
+    color: '#2B2118'
+    fontSize: 18
+    lineHeight: 1.42
+- elementId: wide-image
+  elementType: image
+  bounds:
+  - 52
+  - 332
+  - 856
+  - 142
+  src: media/saint-michel-sepia.jpg
+  fit:
+    mode: cover
+- elementId: wide-shade
+  elementType: shape
+  bounds:
+  - 52
+  - 332
+  - 856
+  - 142
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#17110D30'
+- elementId: footer-line
+  elementType: line
+  bounds:
+  - 52
+  - 510
+  - 856
+  - 1
+  viewBox:
+  - 1
+  - 1
+  points: 0,0 1,0
+  curve: sharp
+  border:
+    style: solid
+    width: 1
+    color: '#7A2E2E55'
+- elementId: source
+  elementType: text
+  bounds:
+  - 52
+  - 518
+  - 720
+  - 14
+  content:
+    style: $footer
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_drummond.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : contributions et François Foulem'
+    wrap: false
+    color: '#6F6256'
+    fontSize: 8
+    align:
+    - left
+    - middle
+- elementId: page-num
+  elementType: text
+  bounds:
+  - 820
+  - 518
+  - 88
+  - 14
+  content:
+    style: $footer
+    text: '03'
+    wrap: false
+    color: '#6F6256'
+    fontSize: 9
+    bold: true
+    align:
+    - right
+    - middle

@@ -1,0 +1,153 @@
+pageType: content
+background:
+  type: image
+  src: media/saint-andre-sepia.jpg
+  fit:
+    mode: cover
+elements:
+- elementId: background-image
+  elementType: image
+  bounds:
+  - 0
+  - 0
+  - 960
+  - 540
+  src: media/saint-andre-sepia.jpg
+  fit:
+    mode: cover
+- elementId: dark-overlay
+  elementType: shape
+  bounds:
+  - 0
+  - 0
+  - 960
+  - 540
+  shapeName: rect
+  fill:
+    type: solid
+    color: '#17110DC7'
+- elementId: year
+  elementType: text
+  bounds:
+  - 52
+  - 54
+  - 260
+  - 54
+  content:
+    style: $label
+    text: Terre
+    wrap: false
+    color: '#B08A3C'
+    fontSize: 20
+    bold: true
+- elementId: quote-rule
+  elementType: line
+  bounds:
+  - 52
+  - 126
+  - 148
+  - 1
+  viewBox:
+  - 1
+  - 1
+  points: 0,0 1,0
+  curve: sharp
+  border:
+    style: solid
+    width: 4
+    color: '#B08A3C'
+- elementId: title
+  elementType: text
+  bounds:
+  - 52
+  - 158
+  - 620
+  - 100
+  content:
+    style: $title
+    text: La pomme de terre et la forêt
+    wrap: true
+    color: '#F5F0E6'
+    fontSize: 46
+    bold: true
+    lineHeight: 1.05
+- elementId: quote-mark
+  elementType: text
+  bounds:
+  - 54
+  - 282
+  - 90
+  - 86
+  content:
+    style: $year
+    text: «
+    wrap: false
+    color: '#B08A3C'
+    fontSize: 78
+    bold: true
+- elementId: body
+  elementType: text
+  bounds:
+  - 144
+  - 292
+  - 680
+  - 116
+  content:
+    style: $quote
+    text: La culture de la pomme de terre domine, avec l’avoine, le blé, l’orge, le sarrasin, les légumes, les fermes laitières
+      et l’exploitation forestière.
+    wrap: true
+    color: '#F5F0E6'
+    fontSize: 24
+    italic: true
+    lineHeight: 1.35
+- elementId: footer-line
+  elementType: line
+  bounds:
+  - 52
+  - 510
+  - 856
+  - 1
+  viewBox:
+  - 1
+  - 1
+  points: 0,0 1,0
+  curve: sharp
+  border:
+    style: solid
+    width: 1
+    color: '#F5F0E66B'
+- elementId: source
+  elementType: text
+  bounds:
+  - 52
+  - 518
+  - 720
+  - 14
+  content:
+    style: $footer
+    text: 'Source : <a href="https://diocese-edmundston.ca/fr/zp_st-andre.html">Diocèse d’Edmundston</a> — page historique,
+      consultée le 7 août 2026 · Photos : Google, Archives R. H. S.-J. et contributions'
+    wrap: false
+    color: '#F5F0E6CC'
+    fontSize: 8
+    align:
+    - left
+    - middle
+- elementId: page-num
+  elementType: text
+  bounds:
+  - 820
+  - 518
+  - 88
+  - 14
+  content:
+    style: $footer
+    text: '05'
+    wrap: false
+    color: '#F5F0E6CC'
+    fontSize: 9
+    bold: true
+    align:
+    - right
+    - middle
